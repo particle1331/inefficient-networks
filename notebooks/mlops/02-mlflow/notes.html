@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiment Tracking and Model Management &#8212; 𝗜𝗻𝗲𝗳𝗳𝗶𝗰𝗶𝗲𝗻𝘁 𝗡𝗲𝘁𝘄𝗼𝗿𝗸𝘀</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/pone.0237978.g001.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Orchestration and ML Pipelines" href="../03-prefect/notes.html" />
+    <link rel="prev" title="Preliminaries" href="../01-intro/notes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/pone.0237978.g001.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">𝗜𝗻𝗲𝗳𝗳𝗶𝗰𝗶𝗲𝗻𝘁 𝗡𝗲𝘁𝘄𝗼𝗿𝗸𝘀</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  MLOPS ZOOMCAMP
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01-intro/notes.html">
+   Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Experiment Tracking and Model Management
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03-prefect/notes.html">
+   Orchestration and ML Pipelines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04-deployment/notes.html">
+   Model Deployment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05-monitoring/notes.html">
+   Model Monitoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06-best-practices/notes.html">
+   Best practices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  MODEL DEPLOYMENT
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/production-code.html">
+   Packaging Production Code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/model-serving-api.html">
+   Prediction Serving API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/docker.html">
+   Containerization with Docker
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/cicd-pipelines.html">
+   Continuous Integration and Deployment Pipelines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  FUNDAMENTALS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/pipelines.html">
+   Modelling with Pipelines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/blending-stacking.html">
+   Blending and Stacking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/optuna.html">
+   Hyperparameter Optimization using Optuna
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/missing.html">
+   Handling Missing Values
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DEEP LEARNING
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/backpropagation.html">
+   Backpropagation on DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/01-tensorflow-nn.html">
+   TensorFlow Datasets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/02-tensorflow-mechanics.html">
+   Mechanics of TensorFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/03-tensorflow-activations.html">
+   Activation Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/04-tensorflow-optim-init.html">
+   Initialization and Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/05-tensorflow-cnn.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/06-tensorflow-rnns.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/notebooks/mlops/02-mlflow/notes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/particle1331/inefficient-networks"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/particle1331/inefficient-networks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/mlops/02-mlflow/notes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-mlflow-ui">
+   Getting started: MLflow UI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experiment-tracking">
+   Experiment tracking
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-scikit-learn-models">
+     Using scikit-learn models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hyperparameter-optimization-xgboost">
+     Hyperparameter optimization (XGBoost)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-management">
+   Model management
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-file-loading">
+     Model file loading
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-registry">
+     Model registry
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-workflows">
+   API Workflows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Experiment tracking
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Model registry
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inference-with-staged-models">
+     Inference with staged models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#remote-tracking-server-and-artifact-store-on-aws">
+   Remote tracking server and artifact store on AWS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ec2-instance">
+     EC2 Instance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-bucket">
+     S3 Bucket
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#postgresql-db">
+     PostgreSQL DB
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#server-config-and-launch">
+     Server config and launch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trying-it-out">
+     Trying it out
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix-utility-code">
+   Appendix: Utility code
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Experiment Tracking and Model Management</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-mlflow-ui">
+   Getting started: MLflow UI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experiment-tracking">
+   Experiment tracking
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-scikit-learn-models">
+     Using scikit-learn models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hyperparameter-optimization-xgboost">
+     Hyperparameter optimization (XGBoost)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-management">
+   Model management
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-file-loading">
+     Model file loading
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-registry">
+     Model registry
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-workflows">
+   API Workflows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Experiment tracking
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Model registry
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inference-with-staged-models">
+     Inference with staged models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#remote-tracking-server-and-artifact-store-on-aws">
+   Remote tracking server and artifact store on AWS
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ec2-instance">
+     EC2 Instance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3-bucket">
+     S3 Bucket
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#postgresql-db">
+     PostgreSQL DB
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#server-config-and-launch">
+     Server config and launch
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trying-it-out">
+     Trying it out
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix-utility-code">
+   Appendix: Utility code
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="experiment-tracking-and-model-management">
+<h1>Experiment Tracking and Model Management<a class="headerlink" href="#experiment-tracking-and-model-management" title="Permalink to this headline">¶</a></h1>
+<p><img alt="Status" src="https://img.shields.io/static/v1.svg?label=Status&amp;message=Finished&amp;color=brightgreen" />
+<a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/master/docs/notebooks/mlops/02-mlflow"><img alt="Source" src="https://img.shields.io/static/v1.svg?label=GitHub&amp;message=Source&amp;color=181717&amp;logo=GitHub" /></a>
+<a class="reference external" href="https://github.com/particle1331/inefficient-networks"><img alt="Stars" src="https://img.shields.io/github/stars/particle1331/inefficient-networks?style=social" /></a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>𝗔𝘁𝘁𝗿𝗶𝗯𝘂𝘁𝗶𝗼𝗻: Notes for Module 2 of the MLOps Zoomcamp (2022) by DataTalks.Club.
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this module, we will look <strong>experiment tracking</strong> and <strong>model management</strong>. A machine learning experiment is defined as a session or process of making machine learning models. Experiment tracking is the process of keeping track of all relevant information in an experiments. This includes source code, environment, data, models, hyperparameters, and so on which are important for reproducing the experiment as well as for making actual predictions.</p>
+<p>Manual tracking, e.g. with spreadsheets, is error prone, not standardized, has low visibility, and difficult for teams to collaborate over. As an alternative, we will use the experiment tracking platform <a class="reference external" href="https://mlflow.org/"><strong>MLflow</strong></a>. As we have seen with prototyping a ride duration model, having the ability to reproduce results is important since we want to have the same results when deploying the model in different environments. Using experiment tracking and model management platforms allows us to have better chance at reproducing our results, as well as aid in model management and optimization.</p>
+</div>
+<div class="section" id="getting-started-mlflow-ui">
+<h2>Getting started: MLflow UI<a class="headerlink" href="#getting-started-mlflow-ui" title="Permalink to this headline">¶</a></h2>
+<p>We can run the MLflow UI with an SQLite backend as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mlflow ui --backend-store-uri sqlite:///mlflow.db
+
+<span class="o">[</span><span class="m">2022</span>-05-26 <span class="m">19</span>:35:22 +0800<span class="o">]</span> <span class="o">[</span><span class="m">92498</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Starting gunicorn <span class="m">20</span>.1.0
+<span class="o">[</span><span class="m">2022</span>-05-26 <span class="m">19</span>:35:22 +0800<span class="o">]</span> <span class="o">[</span><span class="m">92498</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Listening at: http://127.0.0.1:5000 <span class="o">(</span><span class="m">92498</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2022</span>-05-26 <span class="m">19</span>:35:22 +0800<span class="o">]</span> <span class="o">[</span><span class="m">92498</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Using worker: sync
+<span class="o">[</span><span class="m">2022</span>-05-26 <span class="m">19</span>:35:22 +0800<span class="o">]</span> <span class="o">[</span><span class="m">92499</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Booting worker with pid: <span class="m">92499</span>
+</pre></div>
+</div>
+<p>For our experiment, we will use our code and data from <a class="reference external" href="https://particle1331.github.io/inefficient-networks/notebooks/mlops/1-intro.html">Module 1</a>. So before doing any run, we either create an <strong>experiment</strong> or connect a run to it if the experiment already exists. This also sets the experiment tracking backend. The same one that is visualized in the UI above.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/mlops/docs/notebooks/mlops/02-mlflow/experiment_lr.py#L25-L27"><code class="docutils literal notranslate"><span class="pre">experiment_lr.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;sqlite:///mlflow.db&quot;</span><span class="p">)</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;nyc-taxi-experiment&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next section of the code executes a <strong>single run</strong> of the experiment. Note the logging at the end of the script. This is quite involved, but here we want to show what types of data can be logged in MLflow. Everything that runs inside the following context is a single run:</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/mlops/docs/notebooks/mlops/02-mlflow/experiment_lr.py#L30-L62"><code class="docutils literal notranslate"><span class="pre">experiment_lr.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># MLflow logging</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_valid</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+    <span class="n">inference_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">rmse_valid</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">y_pred_valid</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_duration_distribution</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">artifacts</span> <span class="o">/</span> <span class="s1">&#39;plot.svg&#39;</span><span class="p">)</span>
+
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;particle&#39;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tag</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="s1">&#39;baseline&#39;</span><span class="p">)</span>
+    
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s1">&#39;train_data_path&#39;</span><span class="p">,</span> <span class="n">train_data_path</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s1">&#39;valid_data_path&#39;</span><span class="p">,</span> <span class="n">valid_data_path</span><span class="p">)</span>
+    
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s1">&#39;rmse_train&#39;</span><span class="p">,</span> <span class="n">rmse_train</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s1">&#39;rmse_valid&#39;</span><span class="p">,</span> <span class="n">rmse_valid</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span>
+        <span class="s1">&#39;inference_time&#39;</span><span class="p">,</span> 
+        <span class="n">inference_time</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_pred_train</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred_valid</span><span class="p">))</span>
+    <span class="p">)</span>
+    
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifacts</span> <span class="o">/</span> <span class="s1">&#39;plot.svg&#39;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifacts</span> <span class="o">/</span> <span class="s1">&#39;preprocessor.pkl&#39;</span><span class="p">,</span> <span class="n">artifact_path</span><span class="o">=</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After running this script, we see in the UI as a single run under the <code class="docutils literal notranslate"><span class="pre">nyc-tax-experiment</span></code> experiment. MLflow is able to obtain the version from <code class="docutils literal notranslate"><span class="pre">git</span></code> and the user from the system, i.e. the user that is currently logged in. The other values are obtained from the logs.</p>
+<div class="figure align-default">
+<img alt="../../../_images/single-run-mlflow.png" src="../../../_images/single-run-mlflow.png" />
+</div>
+<p>If we click on the run, we can see all details about it that were logged. Shown here are the date of the run, the user that executed it, total runtime, the source code used, as well as the git commit hash. Hence, it is best practice to always commit before running experiments. This ties your runs with a specific version of the code. Status <code class="docutils literal notranslate"><span class="pre">FINISHED</span></code> indicates that the script successfully ran. These are useful metadata.</p>
+<div class="figure align-default" id="id3">
+<img alt="../../../_images/mlflow-single-run.png" src="../../../_images/mlflow-single-run.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Logged run of the baseline model. MLflow allows us to preview saved artifacts. Shown here is a plot of distribution of true and predicted target values.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Regarding the details of the trained model, we have parameters which here include only the path of the dataset for training and validation (only paths, no versioning). Most importantly, we can see the logged RMSEs <code class="docutils literal notranslate"><span class="pre">5.7</span></code> (train) and <code class="docutils literal notranslate"><span class="pre">7.759</span></code> (valid). The plot of the distributions of the true and predicted distributions which we logged as a training artifact is also conveniently displayed here. Finally, we log the preprocessor as <strong>artifact</strong> which will be needed for preprocessing test data during inference.</p>
+</div>
+<div class="section" id="experiment-tracking">
+<h2>Experiment tracking<a class="headerlink" href="#experiment-tracking" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we go deeper into experiment tracking with MLflow. We show how to iterate over different models and different parameters. This really just involves wrapping the run function in a loop. The nontrivial part is how to construct the sequence of parameters to loop over. For this we use <a class="reference external" href="https://hyperopt.github.io/hyperopt/">Hyperopt</a> which implements the <a class="reference external" href="https://proceedings.neurips.cc/paper/2011/file/86e8f7ab32cfd12577bc2619bc635690-Paper.pdf">TPE algorithm</a>.</p>
+<p>We also look at the <strong>autologging</strong> feature for supported frameworks. This automates logging of framework specific values such as intermediate values for models trained incrementally such as XGBoost or neural networks, or the estimator class for scikit-learn models. But more importantly, autologging generates the <code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file which makes it easy to deploy models for downstream tasks. Really convenient feature.</p>
+<div class="section" id="using-scikit-learn-models">
+<h3>Using scikit-learn models<a class="headerlink" href="#using-scikit-learn-models" title="Permalink to this headline">¶</a></h3>
+<p>To evaluate different models, we will define a <code class="docutils literal notranslate"><span class="pre">run</span></code> function that takes in parameters that define and configure a run of the experiment. Then, we define a <code class="docutils literal notranslate"><span class="pre">main</span></code> function that controls the runs that will be executed. Here the <code class="docutils literal notranslate"><span class="pre">model_class</span></code> parameter controls which scikit-learn model is used to model the dataset. Note that this connects to the same tracking URI and same experiment.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/mlops/docs/notebooks/mlops/02-mlflow/experiment_sklearn.py"><code class="docutils literal notranslate"><span class="pre">experiment_sklearn.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup</span><span class="p">():</span>
+    
+    <span class="c1"># Preprocessing</span>
+    <span class="o">...</span>
+
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;sqlite:///mlflow.db&quot;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;nyc-taxi-experiment&quot;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">autolog</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">model_class</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model_class</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+        <span class="c1"># MLflow logging</span>
+        <span class="o">...</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">model_class</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Ridge</span><span class="p">,</span>
+        <span class="n">RandomForestRegressor</span><span class="p">,</span> 
+        <span class="n">GradientBoostingRegressor</span><span class="p">,</span>
+    <span class="p">]:</span>
+        <span class="n">run</span><span class="p">(</span><span class="n">model_class</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">setup</span><span class="p">()</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">GradientBoostingRegressor</span></code> has the best validation score:</p>
+<div class="figure align-default">
+<img alt="../../../_images/sklearn-results.png" src="../../../_images/sklearn-results.png" />
+</div>
+<p>Note that autologging is available for scikit-learn models. Using this, parameters (even default ones) are automatically logged. Also, this generates the <code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file along with the environments files and the serialized model. For scikit-learn models we can also see the <code class="docutils literal notranslate"><span class="pre">estimator_class</span></code> of the model. Finally, the input and output signature of the model is also stored. Autologging for supported frameworks can be activated by calling <code class="docutils literal notranslate"><span class="pre">mlflow.&lt;framework&gt;.autolog()</span></code>. This is a really convenient feature of MLflow.</p>
+<div class="figure align-default">
+<img alt="../../../_images/autolog-sk1.png" src="../../../_images/autolog-sk1.png" />
+</div>
+<div class="figure align-default" id="id4">
+<img alt="../../../_images/autolog-sk2.png" src="../../../_images/autolog-sk2.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Autologging of a Random Forest model in scikit-learn.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="hyperparameter-optimization-xgboost">
+<h3>Hyperparameter optimization (XGBoost)<a class="headerlink" href="#hyperparameter-optimization-xgboost" title="Permalink to this headline">¶</a></h3>
+<p>From the previous runs, <code class="docutils literal notranslate"><span class="pre">GradientBoostingRegressor</span></code> has the best performance on this task. So we try out XGBoost next. Moreover, we find the best parameter of XGBoost using Hyperopt. Here the parameters are sampled using the TPE algorithm over the search space defined in the <code class="docutils literal notranslate"><span class="pre">search_space</span></code> dictionary. We look at functionalities MLflow provides to assist with hyperparameter optimization.</p>
+<p>As before, we will define a <code class="docutils literal notranslate"><span class="pre">setup</span></code> function which sets up the required datasets and connections, define a run function (here named <code class="docutils literal notranslate"><span class="pre">objective</span></code>), and a <code class="docutils literal notranslate"><span class="pre">main</span></code> function to facilitate the runs. Finally, we define command line arguments, so we can easily control the details of the runs in the command line.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/mlops/docs/notebooks/mlops/02-mlflow/experiment_xgboost.py"><code class="docutils literal notranslate"><span class="pre">experiment_xgboost.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup</span><span class="p">():</span>
+
+    <span class="c1"># Preprocessing</span>
+    <span class="o">...</span> 
+    
+    <span class="c1"># Set experiment</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;sqlite:///mlflow.db&quot;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;nyc-taxi-experiment&quot;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">xgboost</span><span class="o">.</span><span class="n">autolog</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute validation RMSE (one trial = one run).&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+        
+        <span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">dtrain</span><span class="o">=</span><span class="n">xgb_train</span><span class="p">,</span>
+            <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">evals</span><span class="o">=</span><span class="p">[(</span><span class="n">xgb_valid</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">)],</span>
+            <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">50</span>
+        <span class="p">)</span>
+
+        <span class="c1"># MLflow logging</span>
+        <span class="o">...</span>
+    
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">rmse_valid</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">STATUS_OK</span><span class="p">}</span>
+
+
+<span class="n">search_space</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">scope</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;reg_alpha&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;reg_lambda&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;min_child_weight&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:squarederror&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="mi">42</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">num_runs</span><span class="p">):</span>
+    <span class="n">best_result</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">objective</span><span class="p">),</span>
+        <span class="n">space</span><span class="o">=</span><span class="n">search_space</span><span class="p">,</span>
+        <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span>
+        <span class="n">max_evals</span><span class="o">=</span><span class="n">num_runs</span><span class="p">,</span>
+        <span class="n">trials</span><span class="o">=</span><span class="n">Trials</span><span class="p">()</span>
+    <span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    
+    <span class="kn">import</span> <span class="nn">argparse</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--num_runs&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    
+    <span class="c1"># Experiment runs</span>
+    <span class="n">setup</span><span class="p">()</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">num_runs</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">num_runs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let us look at the details of a single XGBoost run with autologging. Here all 14 parameters of XGBoost are logged (much more than what we have in our search space). Also, we have feature importances and the <code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file along with the environments files. Moreover, we get metrics that are relevant for models trained incrementally, such as the best and stopped iterations (early stopped), as well as a plot of the intermediate values:</p>
+<div class="figure align-default">
+<img alt="../../../_images/xgboost-run.png" src="../../../_images/xgboost-run.png" />
+</div>
+<div class="figure align-default" id="id5">
+<img alt="../../../_images/xgboost-intermediate.png" src="../../../_images/xgboost-intermediate.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Intermediate values plot for an autologged XGBoost model.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>We executed 30 runs of the XGBoost model (+1 with autologging). This can be analyzed using the compare button after selecting the results with the search query <code class="docutils literal notranslate"><span class="pre">tags.model</span> <span class="pre">=</span> <span class="pre">'xgboost'</span></code>. Below we analyze the runs with the parallel coordinate plot. First, we have the specify the parameters and the metric. Then, we can use filters to filter out ranges that result in low objective values.</p>
+<div class="figure align-default">
+<img alt="../../../_images/xgboost-parallel.png" src="../../../_images/xgboost-parallel.png" />
+</div>
+<p>In the other tabs, we also have scatter and contour interactive <a class="reference external" href="https://plotly.com/">plotly</a> plots:</p>
+<div class="figure align-default">
+<img alt="../../../_images/xgboost-scatter.png" src="../../../_images/xgboost-scatter.png" />
+</div>
+<div class="figure align-default" id="id6">
+<img alt="../../../_images/xgboost-contour.png" src="../../../_images/xgboost-contour.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Plots for analyzing the hyperparameter search space of an XGBoost model on this dataset.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="model-management">
+<h2>Model management<a class="headerlink" href="#model-management" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we take a deeper look at <strong>model management</strong>. In addition to experiment tracking, part of model management is to do model versioning and model deployment. Model management using file systems, typically involving only a file name and date modified, is error prone. There is no versioning and no <a class="reference external" href="https://aws.amazon.com/blogs/machine-learning/model-and-data-lineage-in-machine-learning-experimentation/">model lineage</a>. Model lineage refers to all associations between a model and all components involved in its creation.
+Having no model lineage makes it difficult to track results and progress, not to mention reproducing them.</p>
+<p>For each run a <code class="docutils literal notranslate"><span class="pre">run_id</span></code> key is assigned which maps to information such as metrics, source version, and other metadata in the database. If we make sure to commit the code before running model training, then we can trace the source for each run. Each run also has an <code class="docutils literal notranslate"><span class="pre">artifacts</span></code> directory which saves in disk all logged artifacts.</p>
+<p>Autologging also generates a <a class="reference external" href="https://www.mlflow.org/docs/latest/models.html"><code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file</a> which provides a standard format for packaging models that can be used in a variety of downstream tools (e.g. serving through a REST API or batch inference on Apache Spark). This includes package dependencies and Python version used for training, as well as the input and output signature of the model.</p>
+<p>This should allow you to reproduce results of experiment runs with relative ease. Indeed, below we perform inference using the stored preprocessing pipeline and load the model from the <code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file. Note that the full path can be obtained by clicking on the copy button.</p>
+<div class="figure align-default" id="id7">
+<img alt="../../../_images/autologging-1.png" src="../../../_images/autologging-1.png" />
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">In addition to run metadata, the <code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file obtained with autologging preserves model lineage.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="model-file-loading">
+<h3>Model file loading<a class="headerlink" href="#model-file-loading" title="Permalink to this headline">¶</a></h3>
+<p>In the following code, we try to perform inference on test data using the logged model and artifacts. Note that new data has no labels when processed for inference. Let us try to reproduce the valid RMSE of <code class="docutils literal notranslate"><span class="pre">6.656</span></code>. Recall that the model was validated only for rides between 1 and 60 minutes in duration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">runs</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">compute_targets</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+
+<span class="c1"># Configure paths to run</span>
+<span class="n">run_path</span> <span class="o">=</span> <span class="n">runs</span> <span class="o">/</span> <span class="s1">&#39;1&#39;</span> <span class="o">/</span> <span class="s1">&#39;f46f9fedb22c4411b6e265f8e65edbe3&#39;</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">run_path</span> <span class="o">/</span> <span class="s1">&#39;artifacts&#39;</span> <span class="o">/</span> <span class="s1">&#39;model&#39;</span>
+<span class="n">model_artifacts_path</span> <span class="o">=</span> <span class="n">run_path</span> <span class="o">/</span> <span class="s1">&#39;artifacts&#39;</span> <span class="o">/</span> <span class="s1">&#39;preprocessing&#39;</span>
+<span class="n">valid_data_path</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">/</span> <span class="s1">&#39;green_tripdata_2021-02.parquet&#39;</span>
+
+<span class="c1"># Preprocessing test data</span>
+<span class="n">feature_pipe</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_artifacts_path</span> <span class="o">/</span> <span class="s1">&#39;preprocessor.pkl&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">valid_data_path</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">compute_targets</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[(</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[(</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">)]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">feature_pipe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Inference using MLModel file</span>
+<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+<span class="c1"># Reproducing metric: expected 6.656</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">loaded_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.655558028101635
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-registry">
+<h3>Model registry<a class="headerlink" href="#model-registry" title="Permalink to this headline">¶</a></h3>
+<p>Consider the scenario where a data scientist member of our team chooses a new model for production. As deployment engineers, we naturally have the following questions in mind: What has changed in this new model? Is there any preprocessing needed? What are the dependencies? Without experiment tracking, this requires a lot of back and fort communication with the data scientist. If there is an incident in production and we had to rollback the model version, we have to go back to the email thread to determine what changed in this new version. Moreover, it might not be possible to get back the previous model (information of how it was trained has been lost).</p>
+<p>Recall that having a experiment tracking database and standard model files, solves most of the problems above. Having a <strong>model registry</strong> takes care of the last details of versioning and staging. For example, if we want to rollback models, we can only look at the archived models. Note that the model registry does not perform actual deployment of models, it only serves as standardization the process of moving models to production. Further integration with a CI/CD pipeline is needed if we want to trigger deployment steps along with the change in registry labels.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://databricks.com/blog/2020/04/15/databricks-extends-mlflow-model-registry-with-enterprise-features.html">Source: <code class="docutils literal notranslate"><span class="pre">Databricks</span></code></a></p>
+</div>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="../../../_images/model-registry-diagram.png"><img alt="../../../_images/model-registry-diagram.png" src="../../../_images/model-registry-diagram.png" style="width: 35em;" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Having a model registry allows separation of concern. The data scientist only decides which models are ready for production while the deployment engineer takes care of moving models from staging to production, from production to archived.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>To select the models, first we filter with <code class="docutils literal notranslate"><span class="pre">metrics.rmse_valid</span> <span class="pre">&lt;</span> <span class="pre">6.4</span></code>. Then, we can look at the tradeoff between valid RMSE with inference time. The scatter plot is the best tool for this.
+The tradeoffs should be weighed against production requirements. Next step is to analyze the subsets of the data where these top models are wrong, perhaps create an ensemble of them, and so on.</p>
+<div class="figure align-default">
+<img alt="../../../_images/xgboost-select.png" src="../../../_images/xgboost-select.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/xgboost-tradeoff.png" src="../../../_images/xgboost-tradeoff.png" />
+</div>
+<p>From this plot, we look at the 5 points within <code class="docutils literal notranslate"><span class="pre">20e-6</span></code> inference time and <code class="docutils literal notranslate"><span class="pre">6.32</span></code> valid RMSE. For the sake of demonstration, these will make up different versions of our model. The rightmost model in the scatter plot is version 1 of ride duration prediction model. To register this, we simply click the <code class="docutils literal notranslate"><span class="pre">Register</span> <span class="pre">Model</span></code> button in the UI. For our model name, we choose <code class="docutils literal notranslate"><span class="pre">nyc-ride-duration-model</span></code> and we stage this is production. The model registry can be viewed in the <code class="docutils literal notranslate"><span class="pre">Models</span></code> tab of the MLflow UI. We can register any other model to update the existing model.</p>
+<div class="figure align-default">
+<img alt="../../../_images/register-model.png" src="../../../_images/register-model.png" />
+</div>
+<div class="figure align-default" id="id9">
+<img alt="../../../_images/staging.png" src="../../../_images/staging.png" />
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Registering a model and staging a new version of the model trained on the same task.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id10">
+<img alt="../../../_images/production.png" src="../../../_images/production.png" />
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Transitioning the staged model to production and the current model to archived.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="api-workflows">
+<h2>API Workflows<a class="headerlink" href="#api-workflows" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we look at how interact with the MLflow through an API. The idea is that everything that we can do in the UI by clicking buttons, we should be able to do here in code. Also, the fields that are available when using the UI correspond to the function arguments of the corresponding API endpoint.</p>
+<div class="section" id="id1">
+<h3>Experiment tracking<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">MlflowClient</span></code> connects to the experiment tracking server. This provides a <a class="reference external" href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD interface</a> for managing experiments and runs. To demonstrate, we create an experiment using the client and then fetch this experiment by name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlflow.tracking</span> <span class="kn">import</span> <span class="n">MlflowClient</span>
+
+<span class="n">MLFLOW_TRACKING_URI</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///mlflow.db&quot;</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">MlflowClient</span><span class="p">(</span><span class="n">tracking_uri</span><span class="o">=</span><span class="n">MLFLOW_TRACKING_URI</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(Experiment)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    experiment_id=</span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    name=&#39;</span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    artifact_location=&#39;</span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">artifact_location</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">list_experiments</span><span class="p">():</span>
+    <span class="n">print_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Experiment)
+    experiment_id=0
+    name=&#39;Default&#39;
+    artifact_location=&#39;./mlruns/0&#39;
+
+(Experiment)
+    experiment_id=1
+    name=&#39;nyc-taxi-experiment&#39;
+    artifact_location=&#39;./mlruns/1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;test-create-experiment&#39;</span><span class="p">)</span>
+<span class="n">print_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_experiment_by_name</span><span class="p">(</span><span class="s1">&#39;test-create-experiment&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Experiment)
+    experiment_id=7
+    name=&#39;test-create-experiment&#39;
+    artifact_location=&#39;./mlruns/7&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the previous section, we filtered out the five best runs using the UI. This can be done with the client using the <code class="docutils literal notranslate"><span class="pre">search_runs</span></code> method. Note that MLflow stores even deleted experiments. So we specify <code class="docutils literal notranslate"><span class="pre">ViewType</span></code> to <code class="docutils literal notranslate"><span class="pre">ACTIVE_ONLY</span></code> to include only runs that are active (i.e. not deleted) in the search results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlflow.entities</span> <span class="kn">import</span> <span class="n">ViewType</span>
+
+<span class="n">runs</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search_runs</span><span class="p">(</span>
+    <span class="n">experiment_ids</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">filter_string</span><span class="o">=</span><span class="s1">&#39;metrics.rmse_valid &lt; 6.32 and metrics.inference_time &lt; 20e-6&#39;</span><span class="p">,</span>
+    <span class="n">run_view_type</span><span class="o">=</span><span class="n">ViewType</span><span class="o">.</span><span class="n">ACTIVE_ONLY</span><span class="p">,</span>
+    <span class="n">max_results</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">order_by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;metrics.rmse_valid ASC&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;run_id: </span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span><span class="si">}</span><span class="s2">   rmse_valid: </span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;rmse_valid&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">   inference_time: </span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;inference_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>run_id: 1e5a211d4dd84158ade0f3131a6b467a   rmse_valid: 6.286   inference_time: 1.6639e-05
+run_id: a5c39ab3d68d4de791529d083edab919   rmse_valid: 6.293   inference_time: 1.1944e-05
+run_id: f167aef23eef4305b798771a76980bd3   rmse_valid: 6.294   inference_time: 5.9997e-06
+run_id: 167836ec92094ac2b395387619e0a3b8   rmse_valid: 6.295   inference_time: 1.4946e-05
+run_id: bc2c191810a646f287c428126b75f6eb   rmse_valid: 6.307   inference_time: 1.3798e-05
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Model registry<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The following code puts a model into the registry. If the model name already exists, then we get a new version. Otherwise it creates a new model in the model registry. Below we create a new version of our model with almost the same error rate and half the inference time of the current model in production. Observe that MLflow likes to work with the latest version for each stage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="n">MLFLOW_TRACKING_URI</span><span class="p">)</span>
+<span class="n">run_id</span> <span class="o">=</span> <span class="s1">&#39;f167aef23eef4305b798771a76980bd3&#39;</span>
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">register_model</span><span class="p">(</span>
+    <span class="n">model_uri</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;runs:/</span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">/model&quot;</span><span class="p">,</span> 
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nyc-ride-duration-model&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Registered model &#39;nyc-ride-duration-model&#39; already exists. Creating a new version of this model...
+2022/05/31 20:11:42 INFO mlflow.tracking._model_registry.client: Waiting up to 300 seconds for model version to finish creation.                     Model name: nyc-ride-duration-model, version 3
+Created version &#39;3&#39; of model &#39;nyc-ride-duration-model&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This version can be transitioned to staging as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="k">def</span> <span class="nf">transition_stage</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_version</span><span class="p">,</span> <span class="n">new_stage</span><span class="p">,</span> <span class="n">archive_existing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Transition version stage. Update description.&quot;&quot;&quot;</span>
+
+    <span class="n">old_description</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_model_version</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">model_version</span><span class="p">)</span><span class="o">.</span><span class="n">description</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">transition_model_version_stage</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">model_version</span><span class="p">,</span>
+        <span class="n">stage</span><span class="o">=</span><span class="n">new_stage</span><span class="p">,</span>
+        <span class="n">archive_existing_versions</span><span class="o">=</span><span class="n">archive_existing</span>
+    <span class="p">)</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">update_model_version</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">model_version</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="si">}</span><span class="s2">] The model version </span><span class="si">{</span><span class="n">model_version</span><span class="si">}</span><span class="s2"> was transitioned to </span><span class="si">{</span><span class="n">new_stage</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="si">{</span><span class="n">old_description</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+
+<span class="n">transition_stage</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s1">&#39;nyc-ride-duration-model&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Staging&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/update-version.png" src="../../../_images/update-version.png" />
+</div>
+<p>The following lists the latest versions for each stage:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latest_versions</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_latest_versions</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;nyc-ride-duration-model&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">latest_versions</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Version: </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">   Run ID: </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">run_id</span><span class="si">}</span><span class="s2">   Stage: </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">current_stage</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Version: 1   Run ID: bc2c191810a646f287c428126b75f6eb   Stage: Archived
+Version: 2   Run ID: 167836ec92094ac2b395387619e0a3b8   Stage: Production
+Version: 3   Run ID: f167aef23eef4305b798771a76980bd3   Stage: Staging
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same transition function can be used to promote Version 3 to production and archive Version 2 which is currently in production. Note that we can automatically archive Version 2. But we use the transition function so that the description is automatically updated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transition_stage</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s1">&#39;nyc-ride-duration-model&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Production&quot;</span><span class="p">)</span>
+<span class="n">transition_stage</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s1">&#39;nyc-ride-duration-model&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Archived&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/final-versions.png" src="../../../_images/final-versions.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/version3-prod.png" src="../../../_images/version3-prod.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/version2-archived.png" src="../../../_images/version2-archived.png" />
+</div>
+</div>
+<div class="section" id="inference-with-staged-models">
+<h3>Inference with staged models<a class="headerlink" href="#inference-with-staged-models" title="Permalink to this headline">¶</a></h3>
+<p>We can make inference using models in specific stages. Here we use the production model to perform inference. This can be useful if we want to compare a production model to new models in staging. Or if we want to monitor the performance of the production model on new data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">runs</span><span class="p">,</span> <span class="n">filter_target_outliers</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="c1"># Prepare datasets for testing</span>
+<span class="n">valid_data_path</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">/</span> <span class="s1">&#39;green_tripdata_2021-02.parquet&#39;</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">valid_data_path</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">compute_targets</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">filter_target_outliers</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Fix paths</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;nyc-ride-duration-model&#39;</span>
+<span class="n">stage</span> <span class="o">=</span> <span class="s2">&quot;Production&quot;</span>
+<span class="n">run_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_latest_versions</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">stage</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">run_id</span>
+<span class="n">artifacts_path</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">download_artifacts</span><span class="p">(</span><span class="n">run_id</span><span class="o">=</span><span class="n">run_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fetching the preprocessor and staged model (loads latest)</span>
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">artifacts_path</span><span class="si">}</span><span class="s2">/preprocessor.pkl&quot;</span><span class="p">)</span>
+<span class="n">prod_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;models:/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">stage</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">time</span>
+<span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">prod_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1 µs, sys: 0 ns, total: 1 µs
+Wall time: 1.91 µs
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.293886787130318
+</pre></div>
+</div>
+</div>
+</div>
+<br><p><strong>Remark.</strong> MLflow seems to like working only with latest versions in the registry. For example, the line <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model(f&quot;models:/{model_name}/{stage}&quot;)</span></code> above silently loads the latest model at the given stage. Typically, you would like to have only one model in the production stage, but it could be useful to have multiple models in staging. A workaround would be to retrieve the model by using the model version, i.e. use <code class="docutils literal notranslate"><span class="pre">f&quot;models:/{model_name}/{model_version}&quot;</span></code> as <code class="docutils literal notranslate"><span class="pre">model_uri</span></code>. Or fetch all versions of a registered model using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_versions</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search_model_versions</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;name=&#39;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="remote-tracking-server-and-artifact-store-on-aws">
+<h2>Remote tracking server and artifact store on AWS<a class="headerlink" href="#remote-tracking-server-and-artifact-store-on-aws" title="Permalink to this headline">¶</a></h2>
+<p>In this section we configure MLflow with a backend and artifacts store, and a remote tracking server in AWS. This setup is useful for a multiple data scientists in a team working on multiple ML models. Here we will configure: an S3 bucket as artifacts store, a PostgreSQL database in RDS as backend store, and an EC2 instance for running the remote tracking server. The experiments can then be explored by accessing the remote server.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://www.mlflow.org/docs/latest/tracking.html#scenario-4-mlflow-with-remote-tracking-server-backend-and-artifact-stores"><code class="docutils literal notranslate"><span class="pre">Scenario</span> <span class="pre">4</span></code></a></p>
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/mlflow-scenario-4.png" src="../../../_images/mlflow-scenario-4.png" />
+</div>
+<div class="section" id="ec2-instance">
+<h3>EC2 Instance<a class="headerlink" href="#ec2-instance" title="Permalink to this headline">¶</a></h3>
+<p><strong>Launch instance.</strong> Start by logging to your IAM account. Here we launch a <code class="docutils literal notranslate"><span class="pre">t2.micro</span></code> EC2 instance with name <code class="docutils literal notranslate"><span class="pre">mlflow-tracking-server</span></code> and with <code class="docutils literal notranslate"><span class="pre">Amazon</span> <span class="pre">Linux</span> <span class="pre">2</span> <span class="pre">AMI</span> <span class="pre">(HVM))</span></code> 64-bit (x86) OS. These options are both free tier eligible. Create a new <a class="reference external" href="https://particle1331.github.io/inefficient-networks/notebooks/mlops/1-intro.html#renting-an-ec2-instance">key pair</a> so you can connect using SSH. Keep the default values for the other settings. Review the summary and launch the instance.</p>
+<p><strong>Inbound rules.</strong> Go to security groups and edit inbound rules. Our instance should accept incoming SSH (port 22) and HTTP connections (port 5000). Specify CIDR blocks to specify the range of IP addresses that has access to the tracking server, e.g. choose ‘My IP’ as source so only computers on your local network can access the server.</p>
+<br>
+<div class="figure align-default" id="ec2-inbound">
+<img alt="../../../_images/inbound-rules.png" src="../../../_images/inbound-rules.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Choosing <code class="docutils literal notranslate"><span class="pre">0.0.0.0/0</span></code> allows all incoming HTTP access.</span><a class="headerlink" href="#ec2-inbound" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="s3-bucket">
+<h3>S3 Bucket<a class="headerlink" href="#s3-bucket" title="Permalink to this headline">¶</a></h3>
+<p><strong>Create bucket.</strong> Next we create the artifacts storage. Go to S3 and click on ‘Create bucket’. Fill in the bucket name with something that is unique in the all regions. In our case, we found <code class="docutils literal notranslate"><span class="pre">mlflow-artifacts-store-2</span></code> to be unique. Leave all the other configurations with their default values. That’s it!</p>
+</div>
+<div class="section" id="postgresql-db">
+<h3>PostgreSQL DB<a class="headerlink" href="#postgresql-db" title="Permalink to this headline">¶</a></h3>
+<p><strong>Create database.</strong> Go to the RDS Console and click on ‘Create database’. Make sure to select PostgreSQL engine type and the Free tier template. Select an identifier for your DB instance, e.g. <code class="docutils literal notranslate"><span class="pre">mlflow-backend-db</span></code> shown here. Set the master username as <code class="docutils literal notranslate"><span class="pre">mlflow</span></code>. Tick the option ‘Auto generate a password’ so Amazon RDS generate a password automatically. Finally, on the section ‘Additional configuration’ specify an initial database name, e.g. <code class="docutils literal notranslate"><span class="pre">mlflow_backend_db</span></code>, so RDS automatically creates an initial database for you. The generated password will be shown (only once) after the database has been created. You can use the default values for all the other configurations.</p>
+<br>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../../../_images/rds-template.png"><img alt="../../../_images/rds-template.png" src="../../../_images/rds-template.png" style="width: 40em;" /></a>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Choosing an engine and template.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/rds-identifier.png"><img alt="../../../_images/rds-identifier.png" src="../../../_images/rds-identifier.png" style="width: 40em;" /></a>
+</div>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="../../../_images/rds-name.png"><img alt="../../../_images/rds-name.png" src="../../../_images/rds-name.png" style="width: 40em;" /></a>
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Choosing identifier, username, password, and initial database name.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Credentials.</strong> Take note of the following information: master username (<code class="docutils literal notranslate"><span class="pre">DB_USERNAME</span></code>), password (<code class="docutils literal notranslate"><span class="pre">DB_PASSWORD</span></code>), initial database name (<code class="docutils literal notranslate"><span class="pre">DB_NAME</span></code>), and endpoint (<code class="docutils literal notranslate"><span class="pre">DB_ENDPOINT</span></code>). On the RDS dashboard, click on the database and look at ‘Connectivity &amp; security’. The endpoint for the database can be seen there.</p>
+<p><strong>Inbound rules.</strong> Select the VPC security group of the DB under the same tab. Click the security group ID, and edit inbound rules by adding a new rule that allows PostgreSQL connections on the port 5432 from the security group of the EC2 instance for the tracking server. Note that the security group of the EC2 instance is <code class="docutils literal notranslate"><span class="pre">sg-049fa46c4cd030db2</span> <span class="pre">-</span> <span class="pre">launch-wizard-2</span></code> as can be seen on the top of <a class="reference internal" href="#ec2-inbound"><span class="std std-numref">Fig. 11</span></a>. This way, the tracking server will be able to connect to the PostgreSQL database.</p>
+<br><div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="../../../_images/postgres.png"><img alt="../../../_images/postgres.png" src="../../../_images/postgres.png" style="width: 40em;" /></a>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Allow postgres connections from the tracking server to the backend database.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="server-config-and-launch">
+<h3>Server config and launch<a class="headerlink" href="#server-config-and-launch" title="Permalink to this headline">¶</a></h3>
+<p>Here we connect to the <code class="docutils literal notranslate"><span class="pre">mlflow-tracking-server</span></code> EC2 instance from our local terminal. Change to the local <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> directory then:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod <span class="m">400</span> mlflow-tacking.pem
+ssh -i <span class="s2">&quot;mlflow-tracking.pem&quot;</span> ec2-user@ec2-34-209-62-152.us-west-2.compute.amazonaws.com
+</pre></div>
+</div>
+<p>Run the following commands to install the dependencies, configure the environment on the EC2 instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">update</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">mlflow</span> <span class="n">boto3</span> <span class="n">psycopg2</span><span class="o">-</span><span class="n">binary</span>
+<span class="n">aws</span> <span class="n">configure</span>   <span class="c1"># Input your IAM credentials here</span>
+<span class="n">aws</span> <span class="n">s3</span> <span class="n">ls</span>       <span class="c1"># Test if instance can access S3 bucket</span>
+</pre></div>
+</div>
+<p>Finally, launch the server by replacing the following with the appropriate database credentials. You can replace the variables below manually, or you can execute the following assignments for each variable, so that the values are automatically filled.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DB_USER</span><span class="o">=</span>mlflow
+<span class="nb">export</span> <span class="nv">DB_PASSWORD</span><span class="o">=</span>ZbTddA0Zc8LxYcdLFUQr
+<span class="nb">export</span> <span class="nv">DB_ENDPOINT</span><span class="o">=</span>mlflow-backend-database.csegt7oxppl.us-west-2.rds.amazonaws.com
+<span class="nb">export</span> <span class="nv">DB_NAME</span><span class="o">=</span>mlflow_backend_database
+<span class="nb">export</span> <span class="nv">S3_BUCKET_NAME</span><span class="o">=</span>mlflow-artifact-store-2
+
+mlflow server -h <span class="m">0</span>.0.0.0 -p <span class="m">5000</span> <span class="se">\</span>
+    --backend-store-uri<span class="o">=</span>postgresql://<span class="si">${</span><span class="nv">DB_USER</span><span class="si">}</span>:<span class="si">${</span><span class="nv">DB_PASSWORD</span><span class="si">}</span>@<span class="si">${</span><span class="nv">DB_ENDPOINT</span><span class="si">}</span>:5432/<span class="si">${</span><span class="nv">DB_NAME</span><span class="si">}</span> <span class="se">\</span>
+    --default-artifact-root<span class="o">=</span>s3://<span class="si">${</span><span class="nv">S3_BUCKET_NAME</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trying-it-out">
+<h3>Trying it out<a class="headerlink" href="#trying-it-out" title="Permalink to this headline">¶</a></h3>
+<p>Since we are allowed by the inbound rules to send information via HTTP to the tracking server, we should be able to send requests to it. Note that everything that follows is done in our local Jupyter notebook. After setting the tracking URI we should be able to manage experiments and the model registry through the client as before. Note that you may have to do <code class="docutils literal notranslate"><span class="pre">aws</span> <span class="pre">configure</span></code> for credentials in an external machine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">from</span> <span class="nn">mlflow.tracking</span> <span class="kn">import</span> <span class="n">MlflowClient</span>
+
+
+<span class="n">TRACKING_SERVER_HOST</span> <span class="o">=</span> <span class="s2">&quot;ec2-34-209-62-152.us-west-2.compute.amazonaws.com&quot;</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://</span><span class="si">{</span><span class="n">TRACKING_SERVER_HOST</span><span class="si">}</span><span class="s2">:5000&quot;</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">MlflowClient</span><span class="p">(</span><span class="n">tracking_uri</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;http://</span><span class="si">{</span><span class="n">TRACKING_SERVER_HOST</span><span class="si">}</span><span class="s2">:5000&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_experiments</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_registered_models</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running an example experiment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">simplefilter</span>
+<span class="kn">from</span> <span class="nn">sklearn.exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
+<span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">ConvergenceWarning</span><span class="p">)</span>
+
+
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]:</span>
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">nested</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="n">C</span><span class="p">,</span> <span class="s2">&quot;random_state&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">}</span>
+        
+        <span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_params</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">artifact_path</span><span class="o">=</span><span class="s2">&quot;models&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022/06/04 03:44:56 INFO mlflow.tracking.fluent: Experiment with name &#39;iris&#39; does not exist. Creating a new experiment.
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="../../../_images/aws-runs.png"><img alt="../../../_images/aws-runs.png" src="../../../_images/aws-runs.png" style="width: 40em;" /></a>
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Runs are recorded in the tracking UI.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id15">
+<a class="reference internal image-reference" href="../../../_images/s3.png"><img alt="../../../_images/s3.png" src="../../../_images/s3.png" style="width: 40em;" /></a>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">We can see the runs artifacts stored in the S3 bucket.</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="appendix-utility-code">
+<h2>Appendix: Utility code<a class="headerlink" href="#appendix-utility-code" title="Permalink to this headline">¶</a></h2>
+<p>For the experiment run scripts, we used the following utility script to process the datasets used for training. Here we define a preprocessing pipeline <code class="docutils literal notranslate"><span class="pre">feature_pipe</span></code> which allows saving a single preprocessor file as artifact. This also keeps the code clean (i.e. the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method is called only on the raw datasets).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+
+<span class="kn">from</span> <span class="nn">toolz</span> <span class="kn">import</span> <span class="n">compose</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">DictVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+
+<span class="kn">from</span> <span class="nn">pandas.core.common</span> <span class="kn">import</span> <span class="n">SettingWithCopyWarning</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">SettingWithCopyWarning</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib_inline</span> <span class="kn">import</span> <span class="n">backend_inline</span>
+<span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Config variables</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">artifacts</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;artifacts&#39;</span>
+<span class="n">artifacts</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">runs</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;mlruns&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;data&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">PrepareFeatures</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prepare features for dict vectorizer.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">categorical</span><span class="p">,</span> <span class="n">numerical</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">categorical</span> <span class="o">=</span> <span class="n">categorical</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numerical</span> <span class="o">=</span> <span class="n">numerical</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">categorical</span> <span class="o">+</span> <span class="n">numerical</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">[</span><span class="s1">&#39;PU_DO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s1">&#39;PULocationID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="s1">&#39;DOLocationID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">categorical</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">categorical</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">X</span>
+
+
+<span class="k">def</span> <span class="nf">compute_targets</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Derive target from pickup and dropoff datetimes.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create target column and filter outliers</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">lpep_dropoff_datetime</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">lpep_pickup_datetime</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span>
+    
+    <span class="n">targets</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">return</span> <span class="n">targets</span>
+
+
+<span class="k">def</span> <span class="nf">filter_target_outliers</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">y_min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_max</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter data with targets outside of range.&quot;&quot;&quot;</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">duration</span> <span class="o">&gt;=</span> <span class="n">y_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">duration</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">)]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">plot_duration_distribution</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot true and prediction distribution.&quot;&quot;&quot;</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Train&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pred&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Valid&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_datasets</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">,</span> <span class="n">valid_data_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Preprocess datasets for model training and validation. Save pipeline.&quot;&quot;&quot;</span>
+ 
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">)</span>
+    <span class="n">X_valid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">valid_data_path</span><span class="p">)</span>
+    
+    <span class="c1"># Compute labels</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">compute_targets</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_valid</span> <span class="o">=</span> <span class="n">compute_targets</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+
+    <span class="c1"># Filter train and valid (!) data. (i.e. only validate on t=(1, 60) range.)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">filter_target_outliers</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">filter_target_outliers</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
+    
+    <span class="c1"># Feature selection and engineering</span>
+    <span class="n">categorical</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PU_DO&#39;</span><span class="p">]</span>
+    <span class="n">numerical</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trip_distance&#39;</span><span class="p">]</span>
+
+    <span class="n">feature_pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+        <span class="n">PrepareFeatures</span><span class="p">(</span><span class="n">categorical</span><span class="p">,</span> <span class="n">numerical</span><span class="p">),</span>
+        <span class="n">DictVectorizer</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Fit only on train set</span>
+    <span class="n">feature_pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">feature_pipe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_valid</span> <span class="o">=</span> <span class="n">feature_pipe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+
+    <span class="c1"># Save preprocessor</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">feature_pipe</span><span class="p">,</span> <span class="n">artifacts</span> <span class="o">/</span> <span class="s1">&#39;preprocessor.pkl&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/mlops/02-mlflow"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../01-intro/notes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Preliminaries</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../03-prefect/notes.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Orchestration and ML Pipelines</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By 𝗥𝗼𝗻 𝗠𝗲𝗱𝗶𝗻𝗮. Powered by <a href="https://jupyterbook.org">Jupyter Book</a>.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

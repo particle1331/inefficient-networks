@@ -1,0 +1,1363 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orchestration and ML Pipelines &#8212; 𝗜𝗻𝗲𝗳𝗳𝗶𝗰𝗶𝗲𝗻𝘁 𝗡𝗲𝘁𝘄𝗼𝗿𝗸𝘀</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/pone.0237978.g001.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Model Deployment" href="../04-deployment/notes.html" />
+    <link rel="prev" title="Experiment Tracking and Model Management" href="../02-mlflow/notes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/pone.0237978.g001.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">𝗜𝗻𝗲𝗳𝗳𝗶𝗰𝗶𝗲𝗻𝘁 𝗡𝗲𝘁𝘄𝗼𝗿𝗸𝘀</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  MLOPS ZOOMCAMP
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01-intro/notes.html">
+   Preliminaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02-mlflow/notes.html">
+   Experiment Tracking and Model Management
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Orchestration and ML Pipelines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04-deployment/notes.html">
+   Model Deployment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05-monitoring/notes.html">
+   Model Monitoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06-best-practices/notes.html">
+   Best practices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  MODEL DEPLOYMENT
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/production-code.html">
+   Packaging Production Code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/model-serving-api.html">
+   Prediction Serving API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/docker.html">
+   Containerization with Docker
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../deployment/cicd-pipelines.html">
+   Continuous Integration and Deployment Pipelines
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  FUNDAMENTALS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/pipelines.html">
+   Modelling with Pipelines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/blending-stacking.html">
+   Blending and Stacking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/optuna.html">
+   Hyperparameter Optimization using Optuna
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/missing.html">
+   Handling Missing Values
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  DEEP LEARNING
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../fundamentals/backpropagation.html">
+   Backpropagation on DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/01-tensorflow-nn.html">
+   TensorFlow Datasets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/02-tensorflow-mechanics.html">
+   Mechanics of TensorFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/03-tensorflow-activations.html">
+   Activation Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/04-tensorflow-optim-init.html">
+   Initialization and Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/05-tensorflow-cnn.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tensorflow/06-tensorflow-rnns.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/notebooks/mlops/03-prefect/notes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/particle1331/inefficient-networks"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/particle1331/inefficient-networks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/mlops/03-prefect/notes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prefect-flows">
+   Prefect flows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prefect-orion-ui">
+   Prefect Orion UI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mlflow-runs-as-flow">
+   MLflow runs as flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deployment">
+   Deployment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-staging-review">
+     Model staging review
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mlflow-staging-flow">
+     MLflow staging flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#local-storage-setup">
+     Local storage setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deployment-specification">
+     Deployment specification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-workers-to-deployed-workflows">
+     Adding workers to deployed workflows
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Orchestration and ML Pipelines</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prefect-flows">
+   Prefect flows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prefect-orion-ui">
+   Prefect Orion UI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mlflow-runs-as-flow">
+   MLflow runs as flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deployment">
+   Deployment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-staging-review">
+     Model staging review
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mlflow-staging-flow">
+     MLflow staging flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#local-storage-setup">
+     Local storage setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deployment-specification">
+     Deployment specification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-workers-to-deployed-workflows">
+     Adding workers to deployed workflows
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="orchestration-and-ml-pipelines">
+<h1>Orchestration and ML Pipelines<a class="headerlink" href="#orchestration-and-ml-pipelines" title="Permalink to this headline">¶</a></h1>
+<p><img alt="Status" src="https://img.shields.io/static/v1.svg?label=Status&amp;message=Finished&amp;color=brightgreen" />
+<a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/master/docs/notebooks/mlops/03-prefect"><img alt="Source" src="https://img.shields.io/static/v1.svg?label=GitHub&amp;message=Source&amp;color=181717&amp;logo=GitHub" /></a>
+<a class="reference external" href="https://github.com/particle1331/inefficient-networks"><img alt="Stars" src="https://img.shields.io/github/stars/particle1331/inefficient-networks?style=social" /></a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>𝗔𝘁𝘁𝗿𝗶𝗯𝘂𝘁𝗶𝗼𝗻: Notes for Module 3 of the MLOps Zoomcamp (2022) by DataTalks.Club.
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In the previous module, we learned about experiment tracking and model registry.
+In particular, we discussed how to get a candidate model and promote it from staging to production.
+In this module, we learn how to automate this process, and having this scheduled with workflow orchestration — specifically with <a class="reference external" href="https://orion-docs.prefect.io/"><strong>Prefect 2.0</strong></a>.</p>
+<p>Prefect allows us to programatically author, schedule, and monitor workflows. One of the primary goals of Prefect is to minimize time spent on <strong>negative engineering</strong>, i.e. coding against all possible causes of failure. As there are endless ways that elements of a data pipeline can fail, you can potentially spend an endless amount of time on negative engineering. In practical terms, Prefect provides tools such as retries, concurrency, logging, a nice UI, tracking dependencies, a database, caching and serialization, parameterization of scheduled tasks, and more. As we shall see later, this can add observability to every step in the data pipeline.</p>
+</div>
+<div class="section" id="prefect-flows">
+<h2>Prefect flows<a class="headerlink" href="#prefect-flows" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>flow</strong> in Prefect is simply a Python function. This consists of <strong>tasks</strong> which can be thought of as the atom of observability in Prefect. In practice, to create a flow, you simply convert functions that make it up into tasks. Consider the following example from the <a class="reference external" href="https://www.prefect.io/guide/blog/getting-started-prefect-2/#Makingourflowsbetterwithtasks"><em>Getting Started with Prefect 2.0</em></a> blog post. Here, we simulate getting data from an unreliable API, augmenting the fetched data, and writing the resulting data into a database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span><span class="p">,</span> <span class="n">task</span> 
+
+
+<span class="nd">@task</span><span class="p">(</span><span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">call_unreliable_api</span><span class="p">():</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">},</span> <span class="s2">&quot;Failure&quot;</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s2">&quot;Failure&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Our unreliable service failed.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">augment_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">write_to_database</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrote </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2"> to database successfully!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;Success!&quot;</span>
+
+<span class="nd">@flow</span> 
+<span class="k">def</span> <span class="nf">pipeline</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">api_result</span> <span class="o">=</span> <span class="n">call_unreliable_api</span><span class="p">()</span>
+    <span class="n">augmented_data</span> <span class="o">=</span> <span class="n">augment_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">api_result</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">write_to_database</span><span class="p">(</span><span class="n">augmented_data</span><span class="p">)</span>
+
+
+<span class="n">pipeline</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Augment data with zero.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17:26:54.662 | INFO    | prefect.engine - Created flow run &#39;juicy-platypus&#39; for flow &#39;pipeline&#39;
+17:26:54.664 | INFO    | Flow run &#39;juicy-platypus&#39; - Using task runner &#39;ConcurrentTaskRunner&#39;
+17:26:54.671 | WARNING | Flow run &#39;juicy-platypus&#39; - No default storage is configured on the server. Results from this flow run will be stored in a temporary directory in its runtime environment.
+17:26:54.708 | INFO    | Flow run &#39;juicy-platypus&#39; - Created task run &#39;call_unreliable_api-48f93715-0&#39; for task &#39;call_unreliable_api&#39;
+17:26:54.729 | INFO    | Flow run &#39;juicy-platypus&#39; - Created task run &#39;augment_data-505b3e0c-0&#39; for task &#39;augment_data&#39;
+17:26:54.741 | ERROR   | Task run &#39;call_unreliable_api-48f93715-0&#39; - Encountered exception during execution:
+Traceback (most recent call last):
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/prefect/engine.py&quot;, line 798, in orchestrate_task_run
+    result = await run_sync_in_worker_thread(task.fn, *args, **kwargs)
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/prefect/utilities/asyncio.py&quot;, line 54, in run_sync_in_worker_thread
+    return await anyio.to_thread.run_sync(call, cancellable=True)
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/anyio/to_thread.py&quot;, line 31, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/anyio/_backends/_asyncio.py&quot;, line 937, in run_sync_in_worker_thread
+    return await future
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/anyio/_backends/_asyncio.py&quot;, line 867, in run
+    result = context.run(func, *args)
+  File &quot;/var/folders/jq/9vsvd9252_349lsng_5gc_jw0000gn/T/ipykernel_38107/3061218592.py&quot;, line 10, in call_unreliable_api
+    raise Exception(&quot;Our unreliable service failed.&quot;)
+Exception: Our unreliable service failed.
+17:26:54.766 | INFO    | Flow run &#39;juicy-platypus&#39; - Created task run &#39;write_to_database-d58974ba-0&#39; for task &#39;write_to_database&#39;
+17:26:54.782 | INFO    | Task run &#39;call_unreliable_api-48f93715-0&#39; - Received non-final state &#39;AwaitingRetry&#39; when proposing final state &#39;Failed&#39; and will attempt to run again...
+17:26:54.804 | ERROR   | Task run &#39;call_unreliable_api-48f93715-0&#39; - Encountered exception during execution:
+Traceback (most recent call last):
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/prefect/engine.py&quot;, line 798, in orchestrate_task_run
+    result = await run_sync_in_worker_thread(task.fn, *args, **kwargs)
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/prefect/utilities/asyncio.py&quot;, line 54, in run_sync_in_worker_thread
+    return await anyio.to_thread.run_sync(call, cancellable=True)
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/anyio/to_thread.py&quot;, line 31, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/anyio/_backends/_asyncio.py&quot;, line 937, in run_sync_in_worker_thread
+    return await future
+  File &quot;/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/anyio/_backends/_asyncio.py&quot;, line 867, in run
+    result = context.run(func, *args)
+  File &quot;/var/folders/jq/9vsvd9252_349lsng_5gc_jw0000gn/T/ipykernel_38107/3061218592.py&quot;, line 10, in call_unreliable_api
+    raise Exception(&quot;Our unreliable service failed.&quot;)
+Exception: Our unreliable service failed.
+17:26:54.822 | INFO    | Task run &#39;call_unreliable_api-48f93715-0&#39; - Received non-final state &#39;AwaitingRetry&#39; when proposing final state &#39;Failed&#39; and will attempt to run again...
+17:26:54.857 | INFO    | Task run &#39;call_unreliable_api-48f93715-0&#39; - Finished in state Completed()
+17:26:54.885 | INFO    | Task run &#39;augment_data-505b3e0c-0&#39; - Finished in state Completed()
+17:26:54.915 | INFO    | Task run &#39;write_to_database-d58974ba-0&#39; - Finished in state Completed()
+17:26:54.925 | INFO    | Flow run &#39;juicy-platypus&#39; - Finished in state Completed(&#39;All states completed.&#39;)
+Wrote {&#39;data&#39;: 42, &#39;message&#39;: &#39;0&#39;} to database successfully!
+Completed(message=&#39;All states completed.&#39;, type=COMPLETED, result=[Completed(message=None, type=COMPLETED, result={&#39;data&#39;: 42, &#39;message&#39;: &#39;0&#39;}, task_run_id=72365071-5085-4158-a391-eeddede5ca75), Completed(message=None, type=COMPLETED, result={&#39;data&#39;: 42, &#39;message&#39;: &#39;0&#39;}, task_run_id=e7028889-7db0-435f-896c-03e6ff7bb733), Completed(message=None, type=COMPLETED, result=&#39;Success!&#39;, task_run_id=9ec022e6-39e8-41ea-98b2-b0a14df9eaff)], flow_run_id=be507fa9-289c-4ff1-a7eb-fd2aa29ab969)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="prefect-orion-ui">
+<h2>Prefect Orion UI<a class="headerlink" href="#prefect-orion-ui" title="Permalink to this headline">¶</a></h2>
+<p>Notice that this failed before pushing through. We can start the UI by calling <code class="docutils literal notranslate"><span class="pre">prefect</span> <span class="pre">orion</span> <span class="pre">start</span></code> in any directory (<code class="docutils literal notranslate"><span class="pre">.prefect</span></code> is saved in the system’s root directory). This starts the Prefect Orion server in port 4200.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect orion start
+Starting...
+
+ ___ ___ ___ ___ ___ ___ _____    ___  ___ ___ ___  _  _
+<span class="p">|</span> _ <span class="se">\ </span>_ <span class="se">\ </span>__<span class="p">|</span> __<span class="p">|</span> __/ __<span class="p">|</span>_   _<span class="p">|</span>  / _ <span class="se">\|</span> _ <span class="se">\_</span> _/ _ <span class="se">\|</span> <span class="se">\|</span> <span class="p">|</span>
+<span class="p">|</span>  _/   / _<span class="o">||</span> _<span class="o">||</span> _<span class="p">|</span> <span class="o">(</span>__  <span class="p">|</span> <span class="p">|</span>   <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span> <span class="p">|</span>   /<span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="o">)</span> <span class="p">|</span> .<span class="sb">`</span> <span class="p">|</span>
+<span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>_<span class="se">\_</span>__<span class="p">|</span>_<span class="p">|</span> <span class="p">|</span>___<span class="se">\_</span>__<span class="p">|</span> <span class="p">|</span>_<span class="p">|</span>    <span class="se">\_</span>__/<span class="p">|</span>_<span class="p">|</span>_<span class="se">\_</span>__<span class="se">\_</span>__/<span class="p">|</span>_<span class="p">|</span><span class="se">\_</span><span class="p">|</span>
+
+Configure Prefect to communicate with the server with:
+
+    prefect config <span class="nb">set</span> <span class="nv">PREFECT_API_URL</span><span class="o">=</span>http://127.0.0.1:4200/api
+
+Check out the dashboard at http://127.0.0.1:4200
+
+
+
+INFO:     Started server process <span class="o">[</span><span class="m">20557</span><span class="o">]</span>
+INFO:     Waiting <span class="k">for</span> application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:4200 <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
+</pre></div>
+</div>
+<p>We navigate around the UI to find the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> flow and its most recent which, as we have seen in the logs, was able to complete its execution. Here we see that this flow started on <code class="docutils literal notranslate"><span class="pre">2022/06/10</span> <span class="pre">11:05:51</span> <span class="pre">PM</span></code> and ended on <code class="docutils literal notranslate"><span class="pre">2022/06/10</span> <span class="pre">11:05:52</span> <span class="pre">PM</span></code>. We also see the logs has the details of the exception when the API call failed. In the second tab, we can see the tasks that make up this flow. There is also the subflow tab which shows that we can call flows from a parent flow.</p>
+<div class="figure align-default">
+<img alt="../../../_images/hello-world-2.png" src="../../../_images/hello-world-2.png" />
+</div>
+<p>One of the more interesting features of the dashboard is <strong>Radar</strong> on the right. This shows the dependence between tasks. Notice the linear dependence of the tasks, e.g. <code class="docutils literal notranslate"><span class="pre">write_to_database</span></code> depends on <code class="docutils literal notranslate"><span class="pre">augment_data</span></code> task but not on <code class="docutils literal notranslate"><span class="pre">call_unreliable_api</span></code>. Hovering on the tasks show the backward and forward data dependencies. Having tasks arranged in concentric circles allow for a heirarchy of dependence. Note that the runtime for each task is also conveniently displayed.</p>
+<div class="figure align-default">
+<img alt="../../../_images/hello-world-1.png" src="../../../_images/hello-world-1.png" />
+</div>
+<p>Finally, let us look at a flow which failed to complete all its tasks. Here all calls to the API failed despite the retries. The radar plot nicely shows where the flow has failed. This is really useful, especially when we have a dozens task and multiple subflows happening in our data pipeline.</p>
+<div class="figure align-default">
+<img alt="../../../_images/hello-world-3.png" src="../../../_images/hello-world-3.png" />
+</div>
+<br>
+<p><strong>Remark.</strong> Note also that geometrically there is more space available to grow the dependence tree compared to top-down or left-right approaches due to nodes being farther apart as we move radially with a fixed angle, this also allows Radar to minimize edge crossing by combining radial and circumferential movement for the edges between task nodes.</p>
+<p>Furthermore, Radar dynamically updates as tasks complete (or fails). The mini-map, edge tracing, and node selection tools make workflow inspection doable even for highly complex graphs. See <a class="reference external" href="https://www.prefect.io/guide/blog/introducing-radar/"><em>Introducing Radar</em></a> for further reading.</p>
+</div>
+<div class="section" id="mlflow-runs-as-flow">
+<h2>MLflow runs as flow<a class="headerlink" href="#mlflow-runs-as-flow" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will write Prefect flows for running modelling experiments as a flow in Prefect. Our idea is to define a <code class="docutils literal notranslate"><span class="pre">main</span></code> flow which consists of one subflow <code class="docutils literal notranslate"><span class="pre">preprocess_data</span></code> and two tasks which will execute MLflow runs. Note that the output of the <code class="docutils literal notranslate"><span class="pre">preprocess_data</span></code> subflow will be used by the two MLflow runs, so there will be some data dependency.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/85993956250601edeccf0d1bd5f192bb20873677/docs/notebooks/mlops/3-prefect/utils.py"><code class="docutils literal notranslate"><span class="pre">utils.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">load_training_dataframe</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">y_min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_max</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load data from disk and preprocess for training.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Load data from disk</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="c1"># Create target column and filter outliers</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">lpep_dropoff_datetime</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">lpep_pickup_datetime</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">duration</span> <span class="o">&gt;=</span> <span class="n">y_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">duration</span> <span class="o">&lt;=</span> <span class="n">y_max</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">fit_preprocessor</span><span class="p">(</span><span class="n">train_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fit and save preprocessing pipeline.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Unpack passed data</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>    
+
+    <span class="c1"># Initialize pipeline</span>
+    <span class="n">categorical</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PU_DO&#39;</span><span class="p">]</span>
+    <span class="n">numerical</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;trip_distance&#39;</span><span class="p">]</span>
+
+    <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+        <span class="n">PrepareFeatures</span><span class="p">(</span><span class="n">categorical</span><span class="p">,</span> <span class="n">numerical</span><span class="p">),</span>
+        <span class="n">DictVectorizer</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Fit only on train set</span>
+    <span class="n">preprocessor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">artifacts</span> <span class="o">/</span> <span class="s1">&#39;preprocessor.pkl&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">preprocessor</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">create_model_features</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fit feature engineering pipeline. Transform training dataframes.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Unpack passed data</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">y_valid</span> <span class="o">=</span> <span class="n">valid_data</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">X_valid</span> <span class="o">=</span> <span class="n">valid_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Feature engineering</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_valid</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span>
+
+
+<span class="nd">@flow</span>
+<span class="k">def</span> <span class="nf">preprocess_data</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">,</span> <span class="n">valid_data_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return feature and target arrays from paths. </span>
+<span class="sd">    Note: This just combines all the functions above in a single step.&quot;&quot;&quot;</span>
+
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">load_training_dataframe</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">)</span>
+    <span class="n">valid_data</span> <span class="o">=</span> <span class="n">load_training_dataframe</span><span class="p">(</span><span class="n">valid_data_path</span><span class="p">)</span>
+    <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">fit_preprocessor</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+
+    <span class="c1"># X_train, y_train, X_valid, y_valid</span>
+    <span class="k">return</span> <span class="n">create_model_features</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Next, we will create the <code class="docutils literal notranslate"><span class="pre">main</span></code> flow described above. Here we are passing around a <a class="reference external" href="https://orion-docs.prefect.io/api-ref/prefect/futures/"><code class="docutils literal notranslate"><span class="pre">PrefectFuture</span></code></a> object instead of Python objects. Futures represent the execution of a task and allow retrieval of the task run’s state. This so that Prefect is able to track data dependency between tasks — converting to Python objects, i.e. using <code class="docutils literal notranslate"><span class="pre">.result()</span></code>, breaks this lineage. Note that once a future has been passed into the function, then we can treat it as a usual Python object as the <code class="docutils literal notranslate"><span class="pre">task</span></code> wrapper has done work to unpack the future object into Python objects.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">main</span></code> flow, we execute the following sequentially: running a subflow for preprocessing the datasets for modelling, training a linear regression baseline model, and training XGBoost models with different hyperparameters sampled using <a class="reference external" href="https://optunity.readthedocs.io/en/latest/user/solvers/TPE.html">TPE</a>. Sequential execution ensures that all resources are allocated to a single learning algorithm at each point in the flow run.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/85993956250601edeccf0d1bd5f192bb20873677/docs/notebooks/mlops/3-prefect/main.py"><code class="docutils literal notranslate"><span class="pre">main.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">xgb_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">xgb_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute validation RMSE (one trial = one run).&quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+        
+        <span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">dtrain</span><span class="o">=</span><span class="n">xgb_train</span><span class="p">,</span>
+            <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+            <span class="n">evals</span><span class="o">=</span><span class="p">[(</span><span class="n">xgb_valid</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">)],</span>
+            <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">verbose_eval</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="c1"># MLflow logging</span>
+        <span class="o">...</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">rmse_valid</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">STATUS_OK</span><span class="p">}</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">xgboost_runs</span><span class="p">(</span><span class="n">num_runs</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run TPE algorithm on search space to minimize objective.&quot;&quot;&quot;</span>
+
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">xgb_train</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="n">xgb_valid</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_valid</span><span class="p">)</span>
+
+    <span class="n">search_space</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">scope</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;reg_alpha&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;reg_lambda&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s1">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">loguniform</span><span class="p">(</span><span class="s1">&#39;min_child_weight&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:squarederror&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="mi">42</span>
+    <span class="p">}</span>
+
+    <span class="n">best_result</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span>
+        <span class="n">fn</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span>
+            <span class="n">objective</span><span class="p">,</span> 
+            <span class="n">xgb_train</span><span class="o">=</span><span class="n">xgb_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> 
+            <span class="n">xgb_valid</span><span class="o">=</span><span class="n">xgb_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="o">=</span><span class="n">y_valid</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">space</span><span class="o">=</span><span class="n">search_space</span><span class="p">,</span>
+        <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span>
+        <span class="n">max_evals</span><span class="o">=</span><span class="n">num_runs</span><span class="p">,</span>
+        <span class="n">trials</span><span class="o">=</span><span class="n">Trials</span><span class="p">()</span>
+    <span class="p">)</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">linreg_runs</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run linear regression training.&quot;&quot;&quot;</span>
+
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">data</span>
+    
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+        <span class="c1"># MLflow logging</span>
+        <span class="o">...</span>
+
+        
+<span class="nd">@flow</span><span class="p">(</span><span class="n">task_runner</span><span class="o">=</span><span class="n">SequentialTaskRunner</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">train_data_path</span><span class="p">,</span> 
+    <span class="n">valid_data_path</span><span class="p">,</span> 
+    <span class="n">num_xgb_runs</span><span class="p">,</span> 
+    <span class="n">experiment_name</span><span class="p">,</span>
+    <span class="n">tracking_uri</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># Set and run experiment</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="n">tracking_uri</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">,</span> <span class="n">valid_data_path</span><span class="p">)</span>
+    <span class="n">linreg_runs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">xgboost_runs</span><span class="p">(</span><span class="n">num_xgb_runs</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Looking at the dashboard, we can see a run of the <code class="docutils literal notranslate"><span class="pre">main</span></code> flow. As expected, this consists of 3 tasks that are executed sequentially as indicated in the timeline.</p>
+<div class="figure align-default">
+<img alt="../../../_images/mlflow-runs-dashboard.png" src="../../../_images/mlflow-runs-dashboard.png" />
+</div>
+<p>Recall that the first task <code class="docutils literal notranslate"><span class="pre">preprocess-data</span></code> is a subflow. This has concurrent execution which we can see from overlapping lines in its timeline graph. This subflow consists of four tasks.</p>
+<div class="figure align-default">
+<img alt="../../../_images/radar_preprocessing.png" src="../../../_images/radar_preprocessing.png" />
+</div>
+<p>If we check out the radar of the <code class="docutils literal notranslate"><span class="pre">main</span></code> flow, we see the following. Here in an earlier screenshot, we see that <code class="docutils literal notranslate"><span class="pre">xgboost_runs</span></code> is currently running for 1 minute and 14 seconds. Note that both MLflow runs depending on the preprocessing subflow can be seen by the presence of edges. We can go down on the radar for the <code class="docutils literal notranslate"><span class="pre">preprocess-data</span></code> subflow by clicking on the <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">task</span> <span class="pre">runs</span></code> button.</p>
+<div class="figure align-default">
+<img alt="../../../_images/radar_xgb.png" src="../../../_images/radar_xgb.png" />
+</div>
+<p>Here we see the radar plot. Hovering on each task shows its data dependence on other tasks. For each task, the forward and backward data dependency edges are shown by the Radar graph. For example, in the figure below we can see the dependencies for the task <code class="docutils literal notranslate"><span class="pre">load_training_dataframe</span></code> that loads the train dataset. This sends data to the preprocessor (for training) and to the final task (for transformation) which returns all processed data for modelling, so we can see two forward dependencies.</p>
+<div class="figure align-default">
+<img alt="../../../_images/radar.png" src="../../../_images/radar.png" />
+</div>
+</div>
+<div class="section" id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we deploy a workflow that puts the best model in an MLflow experiment to staging in the model registry. This can be useful for regularly staging candidate models models trained on new data. The staged models can then be further checked if it should be deployed into production. The code below is covered in <a class="reference external" href="https://particle1331.github.io/inefficient-networks/notebooks/mlops/2-mlflow/2-mlflow.html#api-workflows">Experiment Tracking and Model Management</a>.</p>
+<div class="section" id="model-staging-review">
+<h3>Model staging review<a class="headerlink" href="#model-staging-review" title="Permalink to this headline">¶</a></h3>
+<p>Below we will run MLflow on localhost with SQLite. This can be easily adapted to a remote tracking server we only have to change <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code>. Connecting to the client:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">from</span> <span class="nn">mlflow.tracking</span> <span class="kn">import</span> <span class="n">MlflowClient</span>
+<span class="kn">from</span> <span class="nn">mlflow.entities</span> <span class="kn">import</span> <span class="n">ViewType</span>
+
+<span class="n">MLFLOW_TRACKING_URI</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///mlflow.db&quot;</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="n">MLFLOW_TRACKING_URI</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">MlflowClient</span><span class="p">(</span><span class="n">tracking_uri</span><span class="o">=</span><span class="n">MLFLOW_TRACKING_URI</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">print_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(Experiment)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    experiment_id=</span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    name=&#39;</span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    artifact_location=&#39;</span><span class="si">{</span><span class="n">experiment</span><span class="o">.</span><span class="n">artifact_location</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">list_experiments</span><span class="p">():</span>
+    <span class="n">print_experiment</span><span class="p">(</span><span class="n">experiment</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Experiment)
+    experiment_id=0
+    name=&#39;Default&#39;
+    artifact_location=&#39;./mlruns/0&#39;
+
+(Experiment)
+    experiment_id=1
+    name=&#39;nyc-taxi-experiment&#39;
+    artifact_location=&#39;./mlruns/1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that the flow performs training a linear model and XGBoost models with different parameters. As sort of minimum requirements, we only consider those models with validation RMSE less than <code class="docutils literal notranslate"><span class="pre">6.5</span></code> and inference time less than <code class="docutils literal notranslate"><span class="pre">2e-5</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search_runs</span><span class="p">(</span>
+    <span class="n">experiment_ids</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">filter_string</span><span class="o">=</span><span class="s1">&#39;metrics.rmse_valid &lt; 6.5 and metrics.inference_time &lt; 20e-6&#39;</span><span class="p">,</span>
+    <span class="n">run_view_type</span><span class="o">=</span><span class="n">ViewType</span><span class="o">.</span><span class="n">ACTIVE_ONLY</span><span class="p">,</span>
+    <span class="n">max_results</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">order_by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;metrics.rmse_valid ASC&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;run_id: </span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span><span class="si">}</span><span class="s2">   rmse_valid: </span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;rmse_valid&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">   inference_time: </span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;inference_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>run_id: 34d34a6ba92a4494bc1e6a7604b303f2   rmse_valid: 6.427   inference_time: 7.6936e-06
+run_id: fcf8eef67dd64db2848e0fecc1969914   rmse_valid: 6.481   inference_time: 4.2133e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>Having satisfied the operating requirements, we can take the model with lowest error as the new version and set it up for staging. Note that this flow can fail when there are no experiments in our tracker. But that is okay as it serves as notification for us to look into our models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_to_stage</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">registered_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">register_model</span><span class="p">(</span>
+    <span class="n">model_uri</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;runs:/</span><span class="si">{</span><span class="n">model_to_stage</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span><span class="si">}</span><span class="s2">/model&quot;</span><span class="p">,</span> 
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NYCRideDurationModel&#39;</span>
+<span class="p">)</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">transition_model_version_stage</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NYCRideDurationModel&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="n">registered_model</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> 
+    <span class="n">stage</span><span class="o">=</span><span class="s1">&#39;Staging&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully registered model &#39;NYCRideDurationModel&#39;.
+2022/06/13 00:25:49 INFO mlflow.tracking._model_registry.client: Waiting up to 300 seconds for model version to finish creation.                     Model name: NYCRideDurationModel, version 1
+Created version &#39;1&#39; of model &#39;NYCRideDurationModel&#39;.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ModelVersion: creation_timestamp=1655051149815, current_stage=&#39;Staging&#39;, description=None, last_updated_timestamp=1655051149828, name=&#39;NYCRideDurationModel&#39;, run_id=&#39;34d34a6ba92a4494bc1e6a7604b303f2&#39;, run_link=None, source=&#39;./mlruns/1/34d34a6ba92a4494bc1e6a7604b303f2/artifacts/model&#39;, status=&#39;READY&#39;, status_message=None, tags={}, user_id=None, version=1&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="id1">
+<img alt="../../../_images/mlflow-automatic-staging.png" src="../../../_images/mlflow-automatic-staging.png" />
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Staged model from code cells above.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="mlflow-staging-flow">
+<h3>MLflow staging flow<a class="headerlink" href="#mlflow-staging-flow" title="Permalink to this headline">¶</a></h3>
+<p>This looks good, so we collect the above code cells along into a workflow which will create a new experiment, perform the experiment runs, and filter the best model for staging. We will then schedule this workflow to be run at fixed intervals using Prefect.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/06a1ecfea5456430538d13cdebbbe4c23dbbe93c/docs/notebooks/mlops/3-prefect/main.py"><code class="docutils literal notranslate"><span class="pre">main.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">stage_model</span><span class="p">(</span><span class="n">tracking_uri</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Register and stage best model.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Get best model from current experiment</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">MlflowClient</span><span class="p">(</span><span class="n">tracking_uri</span><span class="o">=</span><span class="n">tracking_uri</span><span class="p">)</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search_runs</span><span class="p">(</span>
+        <span class="n">experiment_ids</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">get_experiment_by_name</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span><span class="o">.</span><span class="n">experiment_id</span><span class="p">,</span>
+        <span class="n">filter_string</span><span class="o">=</span><span class="s1">&#39;metrics.rmse_valid &lt; 6.5 and metrics.inference_time &lt; 20e-6&#39;</span><span class="p">,</span>
+        <span class="n">run_view_type</span><span class="o">=</span><span class="n">ViewType</span><span class="o">.</span><span class="n">ACTIVE_ONLY</span><span class="p">,</span>
+        <span class="n">max_results</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">order_by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;metrics.rmse_valid ASC&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Register and stage best model</span>
+    <span class="n">best_model</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">registered_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">register_model</span><span class="p">(</span>
+        <span class="n">model_uri</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;runs:/</span><span class="si">{</span><span class="n">best_model</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span><span class="si">}</span><span class="s2">/model&quot;</span><span class="p">,</span> 
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NYCRideDurationModel&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">transition_model_version_stage</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NYCRideDurationModel&#39;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">registered_model</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> 
+        <span class="n">stage</span><span class="o">=</span><span class="s1">&#39;Staging&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Update description of staged model</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">update_model_version</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NYCRideDurationModel&#39;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">registered_model</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="si">}</span><span class="s2">] The model version </span><span class="si">{</span><span class="n">registered_model</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2"> from experiment &#39;</span><span class="si">{</span><span class="n">experiment_name</span><span class="si">}</span><span class="s2">&#39; was transitioned to Staging.&quot;</span>
+    <span class="p">)</span>
+
+<span class="o">...</span>
+
+<span class="nd">@flow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mlflow-staging&#39;</span><span class="p">,</span> <span class="n">task_runner</span><span class="o">=</span><span class="n">SequentialTaskRunner</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">mlflow_staging</span><span class="p">(</span>
+    <span class="n">train_data_path</span><span class="p">,</span> 
+    <span class="n">valid_data_path</span><span class="p">,</span> 
+    <span class="n">num_xgb_runs</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">):</span>    
+    <span class="c1"># Setup experiment</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">get_run_context</span><span class="p">()</span>
+    <span class="n">MLFLOW_TRACKING_URI</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///mlflow.db&quot;</span>
+    <span class="n">EXPERIMENT_NAME</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;nyc-taxi-experiment-</span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">flow_run</span><span class="o">.</span><span class="n">expected_start_time</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Make experiment runs</span>
+    <span class="n">main</span><span class="p">(</span>
+        <span class="n">train_data_path</span><span class="o">=</span><span class="n">train_data_path</span><span class="p">,</span> 
+        <span class="n">valid_data_path</span><span class="o">=</span><span class="n">valid_data_path</span><span class="p">,</span> 
+        <span class="n">num_xgb_runs</span><span class="o">=</span><span class="n">num_xgb_runs</span><span class="p">,</span> 
+        <span class="n">experiment_name</span><span class="o">=</span><span class="n">EXPERIMENT_NAME</span><span class="p">,</span>
+        <span class="n">tracking_uri</span><span class="o">=</span><span class="n">MLFLOW_TRACKING_URI</span><span class="p">,</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Stage best model</span>
+    <span class="n">stage_model</span><span class="p">(</span>
+        <span class="n">tracking_uri</span><span class="o">=</span><span class="n">MLFLOW_TRACKING_URI</span><span class="p">,</span> 
+        <span class="n">experiment_name</span><span class="o">=</span><span class="n">EXPERIMENT_NAME</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">mlflow_staging</span></code> creates a new experiment every time it runs with name based on the scheduled start time (obtained using the run context <code class="docutils literal notranslate"><span class="pre">ctx</span></code>). It’s important that injecting the correct datetime parameter (for identifying the experiment) is delegated to the orchestrator instead of the executing machine. For example, the clock on the executing machine might be rouge, in a different timezone, or the job may be queued for some reason so that execution time is delayed. This is the case for the test run in the following figure.</p>
+<div class="figure align-default" id="id2">
+<img alt="../../../_images/flow-context.png" src="../../../_images/flow-context.png" />
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Run context for a test flow that simply logs the scheduled time. For some reason, execution is delayed so that the execution time differs from the scheduled time. Also, the orchestrator time is in UTC (standard) while the other values are in UTC+8 (system time).</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Later we see that we can specify a parameter dictionary for passing parameter values in the flow during deployment. So it is good practice to run a flow with a test parameters dict. Thus, we append the script with the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;train_data_path&quot;</span><span class="p">:</span> <span class="s1">&#39;./data/green_tripdata_2021-01.parquet&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;valid_data_path&quot;</span><span class="p">:</span> <span class="s1">&#39;./data/green_tripdata_2021-02.parquet&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;num_xgb_runs&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">mlflow_staging</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python main.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00:28:34.569 | INFO    | prefect.engine - Created flow run &#39;flashy-dove&#39; for flow &#39;mlflow-staging&#39;
+00:28:34.569 | INFO    | Flow run &#39;flashy-dove&#39; - Using task runner &#39;SequentialTaskRunner&#39;
+00:28:34.623 | INFO    | Flow run &#39;flashy-dove&#39; - Created subflow run &#39;uppish-earthworm&#39; for flow &#39;main&#39;
+2022/06/13 00:28:34 INFO mlflow.tracking.fluent: Experiment with name &#39;nyc-taxi-experiment-2022-06-13 00:28:34.236376&#39; does not exist. Creating a new experiment.
+00:28:34.774 | INFO    | Flow run &#39;uppish-earthworm&#39; - Created subflow run &#39;bizarre-trout&#39; for flow &#39;preprocess-data&#39;
+00:28:34.823 | INFO    | Flow run &#39;bizarre-trout&#39; - Created task run &#39;load_training_dataframe-4335dacd-0&#39; for task &#39;load_training_dataframe&#39;
+00:28:34.851 | INFO    | Flow run &#39;bizarre-trout&#39; - Created task run &#39;load_training_dataframe-4335dacd-1&#39; for task &#39;load_training_dataframe&#39;
+00:28:34.875 | INFO    | Flow run &#39;bizarre-trout&#39; - Created task run &#39;fit_preprocessor-5181a278-0&#39; for task &#39;fit_preprocessor&#39;
+00:28:34.980 | INFO    | Flow run &#39;bizarre-trout&#39; - Created task run &#39;create_model_features-3b628d84-0&#39; for task &#39;create_model_features&#39;
+00:28:35.834 | INFO    | Task run &#39;load_training_dataframe-4335dacd-1&#39; - Finished in state Completed()
+00:28:36.159 | INFO    | Task run &#39;load_training_dataframe-4335dacd-0&#39; - Finished in state Completed()
+00:28:37.454 | INFO    | Task run &#39;fit_preprocessor-5181a278-0&#39; - Finished in state Completed()
+00:28:38.063 | INFO    | Task run &#39;create_model_features-3b628d84-0&#39; - Finished in state Completed()
+00:28:38.143 | INFO    | Flow run &#39;bizarre-trout&#39; - Finished in state Completed()
+00:28:38.156 | INFO    | Flow run &#39;uppish-earthworm&#39; - Created task run &#39;linreg_runs-ec095b6c-0&#39; for task &#39;linreg_runs&#39;
+/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&quot;Setuptools is replacing distutils.&quot;)
+00:28:41.477 | INFO    | Task run &#39;linreg_runs-ec095b6c-0&#39; - Finished in state Completed()
+00:28:41.492 | INFO    | Flow run &#39;uppish-earthworm&#39; - Created task run &#39;xgboost_runs-aa2fafb9-0&#39; for task &#39;xgboost_runs&#39;
+100%|████████████| 3/3 [00:21&lt;00:00,  7.01s/trial, best loss: 6.457347294996046]
+00:29:02.638 | INFO    | Task run &#39;xgboost_runs-aa2fafb9-0&#39; - Finished in state Completed()
+00:29:02.801 | INFO    | Flow run &#39;uppish-earthworm&#39; - Finished in state Completed(&#39;All states completed.&#39;)
+00:29:02.826 | INFO    | Flow run &#39;flashy-dove&#39; - Created task run &#39;stage_model-49154c66-0&#39; for task &#39;stage_model&#39;
+Registered model &#39;NYCRideDurationModel&#39; already exists. Creating a new version of this model...
+2022/06/13 00:29:03 INFO mlflow.tracking._model_registry.client: Waiting up to 300 seconds for model version to finish creation.                     Model name: NYCRideDurationModel, version 3
+Created version &#39;3&#39; of model &#39;NYCRideDurationModel&#39;.
+00:29:03.103 | INFO    | Task run &#39;stage_model-49154c66-0&#39; - Finished in state Completed()
+00:29:03.256 | INFO    | Flow run &#39;flashy-dove&#39; - Finished in state Completed(&#39;All states completed.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check out <code class="docutils literal notranslate"><span class="pre">flashy-dove</span></code> in the Prefect Orion UI. Looks good. Here we see the <code class="docutils literal notranslate"><span class="pre">main</span></code> subflow for training and the <code class="docutils literal notranslate"><span class="pre">stage_model</span></code> task for staging the best model in the experiment that was just performed. This can all be checked in MLflow.</p>
+<div class="figure align-default">
+<img alt="../../../_images/flashy-dove.png" src="../../../_images/flashy-dove.png" />
+</div>
+<p>LGTM, let’s deploy!</p>
+</div>
+<div class="section" id="local-storage-setup">
+<h3>Local storage setup<a class="headerlink" href="#local-storage-setup" title="Permalink to this headline">¶</a></h3>
+<p>Before creating a deployment in Prefect let us first setup a local storage for saving for persisting flow code for deployments, task results, and flow results. This is simple enough to do. Take note of the storage identifier as this will be used later.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect storage create
+
+Found the following storage types:
+0) Azure Blob Storage
+    Store data in an Azure blob storage container.
+1) File Storage
+    Store data as a file on local or remote file systems.
+2) Google Cloud Storage
+    Store data in a GCS bucket.
+3) Local Storage
+    Store data in a run&#39;s local file system.
+4) S3 Storage
+    Store data in an AWS S3 bucket.
+5) Temporary Local Storage
+    Store data in a temporary directory in a run&#39;s local file system.
+Select a storage type to create: 3
+You&#39;ve selected Local Storage. It has 1 option(s).
+STORAGE PATH: ~/.prefect/local-storage
+Choose a new name for this storage configuration: local-storage
+Registered storage &#39;local-storage&#39; with identifier
+&#39;33133d27-a83b-468c-bb72-a9f19bd0d157&#39;.
+</pre></div>
+</div>
+</div>
+<div class="section" id="deployment-specification">
+<h3>Deployment specification<a class="headerlink" href="#deployment-specification" title="Permalink to this headline">¶</a></h3>
+<p>For the deployment, we run the <code class="docutils literal notranslate"><span class="pre">mlflow-staging</span></code> flow every 5 minutes locally. We also set the parameters for each run. This adds a bit of flexibility. For now, the datasets are fixed, but it makes sense to run this on fresh data so that we actually get an updated model at each scheduled run.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://github.com/particle1331/inefficient-networks/blob/85993956250601edeccf0d1bd5f192bb20873677/docs/notebooks/mlops/3-prefect/deployments.py"><code class="docutils literal notranslate"><span class="pre">deployments.py</span></code></a></p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect.deployments</span> <span class="kn">import</span> <span class="n">DeploymentSpec</span>
+<span class="kn">from</span> <span class="nn">prefect.orion.schemas.schedules</span> <span class="kn">import</span> <span class="n">IntervalSchedule</span>
+<span class="kn">from</span> <span class="nn">prefect.flow_runners</span> <span class="kn">import</span> <span class="n">SubprocessFlowRunner</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+
+<span class="n">DeploymentSpec</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;deploy-mlflow-staging&quot;</span><span class="p">,</span>
+    <span class="n">flow_name</span><span class="o">=</span><span class="s1">&#39;mlflow-staging&#39;</span><span class="p">,</span>
+    <span class="n">schedule</span><span class="o">=</span><span class="n">IntervalSchedule</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span>
+    <span class="n">flow_location</span><span class="o">=</span><span class="s2">&quot;./main.py&quot;</span><span class="p">,</span>
+    <span class="n">flow_storage</span><span class="o">=</span><span class="s2">&quot;33133d27-a83b-468c-bb72-a9f19bd0d157&quot;</span><span class="p">,</span> <span class="c1"># local storage id</span>
+    <span class="n">flow_runner</span><span class="o">=</span><span class="n">SubprocessFlowRunner</span><span class="p">(),</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;train_data_path&quot;</span><span class="p">:</span> <span class="s1">&#39;./data/green_tripdata_2021-01.parquet&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;valid_data_path&quot;</span><span class="p">:</span> <span class="s1">&#39;./data/green_tripdata_2021-02.parquet&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;num_xgb_runs&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ml&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">SubprocessFlowRunner()</span></code> as flow runner, means that this flow is executed locally, e.g. not on Kubernetes or Docker containers. Here we specify the local storage identifier that we have just created above. Note that we specify the flow by name (<code class="docutils literal notranslate"><span class="pre">'mlflow-staging'</span></code>). This is why we defined <code class="docutils literal notranslate"><span class="pre">name='mlflow-staging'</span></code> in the decorator of <code class="docutils literal notranslate"><span class="pre">mlflow_staging</span></code>. To push our deployment to Prefect, we execute the following in the terminal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>prefect deployment create deployments.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading deployment specifications from python script at <span class=" -Color -Color-Green">&#39;deployments.py&#39;</span>...
+/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/prefect/deployments.py:247: UserWarning: You have configured local storage, this deployment will only be usable from the current machine..
+  warnings.warn(
+Creating deployment <span class=" -Color -Color-Bold -Color-Bold-Blue">&#39;deploy-mlflow-staging&#39;</span> for flow <span class=" -Color -Color-Blue">&#39;mlflow-staging&#39;</span>...
+Deploying flow script from <span class=" -Color -Color-Green">&#39;/Users/particle1331/code/inefficient-networks/docs/n</span>
+<span class=" -Color -Color-Green">otebooks/mlops/3-prefect/main.py&#39;</span> using Local Storage...
+Created deployment <span class=" -Color -Color-Blue">&#39;mlflow-staging/</span><span class=" -Color -Color-Bold -Color-Bold-Blue">deploy-mlflow-staging&#39;</span>.
+View your new deployment with: 
+
+    prefect deployment inspect <span class=" -Color -Color-Blue">&#39;mlflow-staging/</span><span class=" -Color -Color-Bold -Color-Bold-Blue">deploy-mlflow-staging&#39;</span>
+<span class=" -Color -Color-Green">Created 1 deployments!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="id3">
+<img alt="../../../_images/deploy-mlflow-staging.png" src="../../../_images/deploy-mlflow-staging.png" />
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">100 runs are now scheduled in Prefect.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="adding-workers-to-deployed-workflows">
+<h3>Adding workers to deployed workflows<a class="headerlink" href="#adding-workers-to-deployed-workflows" title="Permalink to this headline">¶</a></h3>
+<p>Flows are now scheduled in Prefect. Notice that there are late runs. This is because we haven’t attached any workers that will run these tasks. Unlike CI/CD platforms, all compute happens outside of Prefect that users will have to provide to run the scheduled workflows. So we create a <strong>work queue</strong> and fire up a <strong>Prefect agent</strong> to execute our deployment with our local compute. Note that the following setting up can also be done with the help of the UI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>prefect deployment ls
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                  Deployments                                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃<span class=" -Color -Color-Bold"> Name                                 </span>┃<span class=" -Color -Color-Bold"> ID                                   </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│<span class=" -Color -Color-Blue"> mlflow-staging/</span><span class=" -Color -Color-Bold -Color-Bold-Blue">deploy-mlflow-staging</span><span class=" -Color -Color-Blue"> </span>│<span class=" -Color -Color-Cyan"> 271734ba-6e5e-4fa1-bf03-ab6801f7b44f </span>│
+└──────────────────────────────────────┴──────────────────────────────────────┘
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Copying the deployment ID above
+!prefect work-queue create \
+    --deployment &#39;271734ba-6e5e-4fa1-bf03-ab6801f7b44f&#39; \
+    --flow-runner subprocess \
+    mlflow-deploy-runner
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Magenta">UUID</span><span class=" -Color -Color-Bold">(</span><span class=" -Color -Color-Green">&#39;3f80fde3-4390-413f-be3a-3d8da1913163&#39;</span><span class=" -Color -Color-Bold">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following shows the scheduled runs for this worker. This also confirms that we chose the correct flow runner and deployment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copying the worker ID above</span>
+<span class="o">!</span>prefect work-queue preview 3f80fde3-4390-413f-be3a-3d8da1913163
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃<span class=" -Color -Color-Bold"> Scheduled Start… </span>┃<span class=" -Color -Color-Bold"> Run ID                 </span>┃<span class=" -Color -Color-Bold"> Name   </span>┃<span class=" -Color -Color-Bold"> Deployment ID           </span>┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:5… </span>│<span class=" -Color -Color-Cyan"> d381605d-9ceb-4314-bb… </span>│<span class=" -Color -Color-Green"> woode… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:5… </span>│<span class=" -Color -Color-Cyan"> a7e80fc1-99ac-40f4-bb… </span>│<span class=" -Color -Color-Green"> brave… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:5… </span>│<span class=" -Color -Color-Cyan"> 93d3ad27-d7a6-48fa-bb… </span>│<span class=" -Color -Color-Green"> meteo… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:5… </span>│<span class=" -Color -Color-Cyan"> a7140abf-ffbd-4b13-b5… </span>│<span class=" -Color -Color-Green"> glori… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:5… </span>│<span class=" -Color -Color-Cyan"> 38227573-347a-4574-9c… </span>│<span class=" -Color -Color-Green"> denim… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:5… </span>│<span class=" -Color -Color-Cyan"> 95572d03-9888-436b-9b… </span>│<span class=" -Color -Color-Green"> arche… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:4… </span>│<span class=" -Color -Color-Cyan"> 8195406c-62a1-44a3-95… </span>│<span class=" -Color -Color-Green"> thick… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:4… </span>│<span class=" -Color -Color-Cyan"> bd41ec97-66e4-4061-be… </span>│<span class=" -Color -Color-Green"> vanil… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:4… </span>│<span class=" -Color -Color-Cyan"> e8427aaa-9a54-405c-95… </span>│<span class=" -Color -Color-Green"> nippy… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+│<span class=" -Color -Color-Yellow"> 2022-06-12 16:4… </span>│<span class=" -Color -Color-Cyan"> 4a397219-dc7c-43a4-82… </span>│<span class=" -Color -Color-Green"> thick… </span>│<span class=" -Color -Color-Blue"> 271734ba-6e5e-4fa1-bf0… </span>│
+└──────────────────┴────────────────────────┴────────┴─────────────────────────┘
+<span class=" -Color -Color-Red">                            (**) denotes a late run                             </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running the worker now, so it picks up scheduled runs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copying the worker ID above</span>
+<span class="o">!</span>prefect agent start 3f80fde3-4390-413f-be3a-3d8da1913163
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting agent with ephemeral API...
+
+  ___ ___ ___ ___ ___ ___ _____     _   ___ ___ _  _ _____
+ | _ \ _ \ __| __| __/ __|_   _|   /_\ / __| __| \| |_   _|
+ |  _/   / _|| _|| _| (__  | |    / _ \ (_ | _|| .` | | |
+ |_| |_|_\___|_| |___\___| |_|   /_/ \_\___|___|_|\_| |_|
+
+
+Agent started! Looking for work from queue 
+&#39;3f80fde3-4390-413f-be3a-3d8da1913163&#39;...
+00:55:53.694 | INFO    | prefect.agent - Submitting flow run &#39;f01c4790-54bf-464b-b6c9-59b2104d4751&#39;
+00:55:58.730 | INFO    | prefect.agent - Submitting flow run &#39;f01c4790-54bf-464b-b6c9-59b2104d4751&#39;
+00:55:59.751 | INFO    | prefect.flow_runner.subprocess - Opening subprocess for flow run &#39;f01c4790-54bf-464b-b6c9-59b2104d4751&#39;...
+00:55:59.761 | INFO    | prefect.agent - Completed submission of flow run &#39;f01c4790-54bf-464b-b6c9-59b2104d4751&#39;
+00:56:02.765 | INFO    | Flow run &#39;gleaming-honeybee&#39; - Using task runner &#39;SequentialTaskRunner&#39;
+00:56:02.814 | INFO    | Flow run &#39;gleaming-honeybee&#39; - Created subflow run &#39;wisteria-shrimp&#39; for flow &#39;main&#39;
+2022/06/13 00:56:02 INFO mlflow.tracking.fluent: Experiment with name &#39;nyc-taxi-experiment-2022-06-13 00:44:59.733397&#39; does not exist. Creating a new experiment.
+00:56:02.924 | INFO    | Flow run &#39;wisteria-shrimp&#39; - Created subflow run &#39;spotted-toucan&#39; for flow &#39;preprocess-data&#39;
+00:56:02.947 | INFO    | Flow run &#39;spotted-toucan&#39; - Created task run &#39;load_training_dataframe-4335dacd-0&#39; for task &#39;load_training_dataframe&#39;
+00:56:02.961 | INFO    | Flow run &#39;spotted-toucan&#39; - Created task run &#39;load_training_dataframe-4335dacd-1&#39; for task &#39;load_training_dataframe&#39;
+00:56:02.982 | INFO    | Flow run &#39;spotted-toucan&#39; - Created task run &#39;fit_preprocessor-5181a278-0&#39; for task &#39;fit_preprocessor&#39;
+00:56:03.052 | INFO    | Flow run &#39;spotted-toucan&#39; - Created task run &#39;create_model_features-3b628d84-0&#39; for task &#39;create_model_features&#39;
+00:56:03.920 | INFO    | Task run &#39;load_training_dataframe-4335dacd-0&#39; - Finished in state Completed()
+00:56:04.309 | INFO    | Task run &#39;load_training_dataframe-4335dacd-1&#39; - Finished in state Completed()
+00:56:04.886 | INFO    | Task run &#39;fit_preprocessor-5181a278-0&#39; - Finished in state Completed()
+00:56:05.519 | INFO    | Task run &#39;create_model_features-3b628d84-0&#39; - Finished in state Completed()
+00:56:05.624 | INFO    | Flow run &#39;spotted-toucan&#39; - Finished in state Completed()
+00:56:05.664 | INFO    | Flow run &#39;wisteria-shrimp&#39; - Created task run &#39;linreg_runs-f65b5121-0&#39; for task &#39;linreg_runs&#39;
+/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&quot;Setuptools is replacing distutils.&quot;)
+00:56:09.216 | INFO    | Task run &#39;linreg_runs-f65b5121-0&#39; - Finished in state Completed()
+00:56:09.226 | INFO    | Flow run &#39;wisteria-shrimp&#39; - Created task run &#39;xgboost_runs-df0e77b4-0&#39; for task &#39;xgboost_runs&#39;
+ 20%|██        | 2/10 [00:25&lt;01:37, 12.20s/trial, best loss: 6.454475362828172]00:56:54.176 | INFO    | prefect.agent - Submitting flow run &#39;503b1a97-659b-403b-8364-d8b4b92a0811&#39;
+ 30%|███       | 3/10 [00:47&lt;01:59, 17.00s/trial, best loss: 6.454475362828172]00:56:59.265 | INFO    | prefect.agent - Submitting flow run &#39;503b1a97-659b-403b-8364-d8b4b92a0811&#39;
+00:56:59.267 | INFO    | prefect.flow_runner.subprocess - Opening subprocess for flow run &#39;503b1a97-659b-403b-8364-d8b4b92a0811&#39;...
+00:56:59.279 | INFO    | prefect.agent - Completed submission of flow run &#39;503b1a97-659b-403b-8364-d8b4b92a0811&#39;
+ 40%|████      | 4/10 [00:51&lt;01:11, 11.87s/trial, best loss: 6.454475362828172]00:57:03.606 | INFO    | Flow run &#39;therapeutic-dogfish&#39; - Using task runner &#39;SequentialTaskRunner&#39;
+00:57:03.687 | INFO    | Flow run &#39;therapeutic-dogfish&#39; - Created subflow run &#39;beryl-seriema&#39; for flow &#39;main&#39;
+00:57:03.982 | INFO    | Flow run &#39;beryl-seriema&#39; - Created subflow run &#39;abiding-spider&#39; for flow &#39;preprocess-data&#39;
+00:57:04.043 | INFO    | Flow run &#39;abiding-spider&#39; - Created task run &#39;load_training_dataframe-4335dacd-0&#39; for task &#39;load_training_dataframe&#39;
+00:57:04.098 | INFO    | Flow run &#39;abiding-spider&#39; - Created task run &#39;load_training_dataframe-4335dacd-1&#39; for task &#39;load_training_dataframe&#39;
+00:57:04.351 | INFO    | Flow run &#39;abiding-spider&#39; - Created task run &#39;fit_preprocessor-5181a278-0&#39; for task &#39;fit_preprocessor&#39;
+00:57:04.491 | INFO    | Flow run &#39;abiding-spider&#39; - Created task run &#39;create_model_features-3b628d84-0&#39; for task &#39;create_model_features&#39;
+00:57:05.902 | INFO    | Task run &#39;load_training_dataframe-4335dacd-1&#39; - Finished in state Completed()
+00:57:06.411 | INFO    | Task run &#39;load_training_dataframe-4335dacd-0&#39; - Finished in state Completed()
+ 50%|█████     | 5/10 [00:57&lt;00:47,  9.55s/trial, best loss: 6.454475362828172]00:57:07.390 | INFO    | Task run &#39;fit_preprocessor-5181a278-0&#39; - Finished in state Completed()
+00:57:08.423 | INFO    | Task run &#39;create_model_features-3b628d84-0&#39; - Finished in state Completed()
+00:57:08.627 | INFO    | Flow run &#39;abiding-spider&#39; - Finished in state Completed()
+00:57:08.658 | INFO    | Flow run &#39;beryl-seriema&#39; - Created task run &#39;linreg_runs-f65b5121-0&#39; for task &#39;linreg_runs&#39;
+/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&quot;Setuptools is replacing distutils.&quot;)
+00:57:12.653 | INFO    | Task run &#39;linreg_runs-f65b5121-0&#39; - Finished in state Completed()
+00:57:12.671 | INFO    | Flow run &#39;beryl-seriema&#39; - Created task run &#39;xgboost_runs-df0e77b4-0&#39; for task &#39;xgboost_runs&#39;
+ 30%|███       | 3/10 [00:41&lt;01:52, 16.09s/trial, best loss: 6.392997003417292]]00:57:54.731 | INFO    | prefect.agent - Submitting flow run &#39;2740040e-6031-4e51-a30a-641dd4d9d361&#39;
+00:57:59.784 | INFO    | prefect.agent - Submitting flow run &#39;2740040e-6031-4e51-a30a-641dd4d9d361&#39;
+00:57:59.802 | INFO    | prefect.flow_runner.subprocess - Opening subprocess for flow run &#39;2740040e-6031-4e51-a30a-641dd4d9d361&#39;...
+00:57:59.814 | INFO    | prefect.agent - Completed submission of flow run &#39;2740040e-6031-4e51-a30a-641dd4d9d361&#39;
+ 40%|████      | 4/10 [00:52&lt;01:22, 13.74s/trial, best loss: 6.392997003417292]00:58:06.948 | INFO    | Flow run &#39;charcoal-buffalo&#39; - Using task runner &#39;SequentialTaskRunner&#39;
+00:58:07.066 | INFO    | Flow run &#39;charcoal-buffalo&#39; - Created subflow run &#39;daffy-stoat&#39; for flow &#39;main&#39;
+00:58:07.313 | INFO    | Flow run &#39;daffy-stoat&#39; - Created subflow run &#39;mutant-mouflon&#39; for flow &#39;preprocess-data&#39;
+00:58:07.364 | INFO    | Flow run &#39;mutant-mouflon&#39; - Created task run &#39;load_training_dataframe-4335dacd-0&#39; for task &#39;load_training_dataframe&#39;
+00:58:07.397 | INFO    | Flow run &#39;mutant-mouflon&#39; - Created task run &#39;load_training_dataframe-4335dacd-1&#39; for task &#39;load_training_dataframe&#39;
+00:58:07.420 | INFO    | Flow run &#39;mutant-mouflon&#39; - Created task run &#39;fit_preprocessor-5181a278-0&#39; for task &#39;fit_preprocessor&#39;
+00:58:07.457 | INFO    | Flow run &#39;mutant-mouflon&#39; - Created task run &#39;create_model_features-3b628d84-0&#39; for task &#39;create_model_features&#39;
+00:58:09.260 | INFO    | Task run &#39;load_training_dataframe-4335dacd-1&#39; - Finished in state Completed()
+00:58:09.784 | INFO    | Task run &#39;load_training_dataframe-4335dacd-0&#39; - Finished in state Completed()
+00:58:11.697 | INFO    | Task run &#39;fit_preprocessor-5181a278-0&#39; - Finished in state Completed()
+00:58:12.775 | INFO    | Task run &#39;create_model_features-3b628d84-0&#39; - Finished in state Completed()
+00:58:12.888 | INFO    | Flow run &#39;mutant-mouflon&#39; - Finished in state Completed()
+00:58:12.929 | INFO    | Flow run &#39;daffy-stoat&#39; - Created task run &#39;linreg_runs-f65b5121-0&#39; for task &#39;linreg_runs&#39;
+/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&quot;Setuptools is replacing distutils.&quot;)
+00:58:17.515 | INFO    | Task run &#39;linreg_runs-f65b5121-0&#39; - Finished in state Completed()
+00:58:17.540 | INFO    | Flow run &#39;daffy-stoat&#39; - Created task run &#39;xgboost_runs-df0e77b4-0&#39; for task &#39;xgboost_runs&#39;
+100%|██████████| 10/10 [02:36&lt;00:00, 15.69s/trial, best loss: 6.4070710286201145]
+00:58:46.764 | INFO    | Task run &#39;xgboost_runs-df0e77b4-0&#39; - Finished in state Completed()
+00:58:47.246 | INFO    | Flow run &#39;wisteria-shrimp&#39; - Finished in state Completed(&#39;All states completed.&#39;)
+00:58:47.290 | INFO    | Flow run &#39;gleaming-honeybee&#39; - Created task run &#39;stage_model-18da4b31-0&#39; for task &#39;stage_model&#39;
+Registered model &#39;NYCRideDurationModel&#39; already exists. Creating a new version of this model...
+2022/06/13 00:58:47 INFO mlflow.tracking._model_registry.client: Waiting up to 300 seconds for model version to finish creation.                     Model name: NYCRideDurationModel, version 4
+Created version &#39;4&#39; of model &#39;NYCRideDurationModel&#39;.
+00:58:47.599 | INFO    | Task run &#39;stage_model-18da4b31-0&#39; - Finished in state Completed()
+00:58:47.783 | INFO    | Flow run &#39;gleaming-honeybee&#39; - Finished in state Completed(&#39;All states completed.&#39;)
+00:58:49.267 | INFO    | prefect.flow_runner.subprocess - Subprocess for flow run &#39;f01c4790-54bf-464b-b6c9-59b2104d4751&#39; exited cleanly.
+00:58:50.835 | INFO    | prefect.agent - Submitting flow run &#39;53519e88-4739-48b4-af24-1e44bcecf186&#39;
+00:58:55.971 | INFO    | prefect.agent - Submitting flow run &#39;53519e88-4739-48b4-af24-1e44bcecf186&#39;
+ 60%|██████    | 6/10 [01:46&lt;01:27, 21.95s/trial, best loss: 6.392997003417292]00:58:59.982 | INFO    | prefect.flow_runner.subprocess - Opening subprocess for flow run &#39;53519e88-4739-48b4-af24-1e44bcecf186&#39;...
+00:58:59.992 | INFO    | prefect.agent - Completed submission of flow run &#39;53519e88-4739-48b4-af24-1e44bcecf186&#39;
+ 20%|██        | 2/10 [00:45&lt;03:05, 23.13s/trial, best loss: 6.4342406106230365]00:59:07.929 | INFO    | Flow run &#39;light-lion&#39; - Using task runner &#39;SequentialTaskRunner&#39;
+00:59:08.062 | INFO    | Flow run &#39;light-lion&#39; - Created subflow run &#39;crystal-barracuda&#39; for flow &#39;main&#39;
+00:59:08.272 | INFO    | Flow run &#39;crystal-barracuda&#39; - Created subflow run &#39;economic-partridge&#39; for flow &#39;preprocess-data&#39;
+00:59:08.319 | INFO    | Flow run &#39;economic-partridge&#39; - Created task run &#39;load_training_dataframe-4335dacd-0&#39; for task &#39;load_training_dataframe&#39;
+00:59:08.351 | INFO    | Flow run &#39;economic-partridge&#39; - Created task run &#39;load_training_dataframe-4335dacd-1&#39; for task &#39;load_training_dataframe&#39;
+00:59:08.398 | INFO    | Flow run &#39;economic-partridge&#39; - Created task run &#39;fit_preprocessor-5181a278-0&#39; for task &#39;fit_preprocessor&#39;
+00:59:08.581 | INFO    | Flow run &#39;economic-partridge&#39; - Created task run &#39;create_model_features-3b628d84-0&#39; for task &#39;create_model_features&#39;
+00:59:10.284 | INFO    | Task run &#39;load_training_dataframe-4335dacd-1&#39; - Finished in state Completed()
+00:59:10.903 | INFO    | Task run &#39;load_training_dataframe-4335dacd-0&#39; - Finished in state Completed()
+00:59:12.521 | INFO    | Task run &#39;fit_preprocessor-5181a278-0&#39; - Finished in state Completed()
+00:59:13.755 | INFO    | Task run &#39;create_model_features-3b628d84-0&#39; - Finished in state Completed()
+00:59:13.915 | INFO    | Flow run &#39;economic-partridge&#39; - Finished in state Completed()
+00:59:13.956 | INFO    | Flow run &#39;crystal-barracuda&#39; - Created task run &#39;linreg_runs-f65b5121-0&#39; for task &#39;linreg_runs&#39;
+ 70%|███████   | 7/10 [02:05&lt;01:02, 20.72s/trial, best loss: 6.337603948759769]/Users/particle1331/miniforge3/envs/prefect/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&quot;Setuptools is replacing distutils.&quot;)
+00:59:19.908 | INFO    | Task run &#39;linreg_runs-f65b5121-0&#39; - Finished in state Completed()
+00:59:19.939 | INFO    | Flow run &#39;crystal-barracuda&#39; - Created task run &#39;xgboost_runs-df0e77b4-0&#39; for task &#39;xgboost_runs&#39;
+ 80%|████████  | 8/10 [02:35&lt;00:47, 23.80s/trial, best loss: 6.337603948759769] 00:59:52.747 | INFO    | prefect.agent - Submitting flow run &#39;dae0ee38-992c-434b-8c7d-23c660aa6af1&#39;
+ 40%|████      | 4/10 [01:38&lt;02:24, 24.08s/trial, best loss: 6.395515995851409]00:59:57.840 | INFO    | prefect.agent - Submitting flow run &#39;dae0ee38-992c-434b-8c7d-23c660aa6af1&#39;
+00:59:59.958 | INFO    | prefect.flow_runner.subprocess - Opening subprocess for flow run &#39;dae0ee38-992c-434b-8c7d-23c660aa6af1&#39;...
+00:59:59.971 | INFO    | prefect.agent - Completed submission of flow run &#39;dae0ee38-992c-434b-8c7d-23c660aa6af1&#39;
+ 10%|█         | 1/10 [00:42&lt;06:23, 42.63s/trial, best loss: 6.408626467921648]^C
+</pre></div>
+</div>
+</div>
+</div>
+<p>We stop the run since this will take a while. But we already see that it has completed one flow, while some flows are still running, some are late, and many are scheduled. The late flows are because we had 1 minute deployments and it took a while for us to create a worker. Another nice thing to notice with the worker works concurrently on late flows.</p>
+<div class="figure align-default">
+<img alt="../../../_images/deployment-1.png" src="../../../_images/deployment-1.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../../_images/deployment-2.png" src="../../../_images/deployment-2.png" />
+</div>
+<p>From the log on <code class="docutils literal notranslate"><span class="pre">00:58:47.290</span></code> we see that the completed flow <code class="docutils literal notranslate"><span class="pre">gleaming-honeybee</span></code> created Version 4 of the model <code class="docutils literal notranslate"><span class="pre">NYCRideDurationModel</span></code>. Indeed, we have this version staged in the model registry:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">get_latest_versions</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;NYCRideDurationModel&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;ModelVersion: creation_timestamp=1655053127536, current_stage=&#39;Staging&#39;, description=(&#39;[2022-06-13 00:58:47.571025] The model version 4 from experiment &#39;
+  &quot;&#39;nyc-taxi-experiment-2022-06-13 00:44:59.733397&#39; was transitioned to &quot;
+  &#39;Staging.&#39;), last_updated_timestamp=1655053127571, name=&#39;NYCRideDurationModel&#39;, run_id=&#39;cf5964fcf6dd47189ba6a5707360155f&#39;, run_link=None, source=&#39;./mlruns/8/cf5964fcf6dd47189ba6a5707360155f/artifacts/model&#39;, status=&#39;READY&#39;, status_message=None, tags={}, user_id=None, version=4&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/mlops/03-prefect"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../02-mlflow/notes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Experiment Tracking and Model Management</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../04-deployment/notes.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Model Deployment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By 𝗥𝗼𝗻 𝗠𝗲𝗱𝗶𝗻𝗮. Powered by <a href="https://jupyterbook.org">Jupyter Book</a>.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
